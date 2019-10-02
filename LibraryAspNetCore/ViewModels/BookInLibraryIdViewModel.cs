@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace LibraryAspNetCore.ViewModels
 {
-    public class BookInLibraryViewModel
+    public class BookInLibraryIdViewModel
     {
-        public Library Library { get; set; }
+        public Guid LibraryId { get; set; }
         public int TotalQuantity { get; set; }
         public int CurrentQuantity { get; set; }
+
     }
 }
