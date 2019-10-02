@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace LibraryAspNetCore.ViewModels
+namespace LibraryAspNetCore.Controllers
 {
     public class AddBooksInLibraryViewModel
     {
-        public Guid BookId { get; set; }
-        public List<BookInLibraryIdViewModel> Libraries { get; set; }
+        public Guid LibraryId { get; set; }
+        public List<BooksInLibraryViewModel> Books{ get; set; }
     }
 }

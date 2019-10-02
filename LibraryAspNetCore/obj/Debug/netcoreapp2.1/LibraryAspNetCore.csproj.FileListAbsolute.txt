@@ -29,8 +29,3 @@ C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netco
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\LibraryAspNetCore.dll
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\LibraryAspNetCore.pdb
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\LibraryAspNetCore.csproj.CopyComplete
-C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\BookInLibraries\Create.cshtml.g.cs
-C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\BookInLibraries\Delete.cshtml.g.cs
-C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\BookInLibraries\Details.cshtml.g.cs
-C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\BookInLibraries\Edit.cshtml.g.cs
-C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\BookInLibraries\Index.cshtml.g.cs

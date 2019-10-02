@@ -18,20 +18,20 @@ namespace LibraryAspNetCore.Controllers
     [Authorize(Roles = "Admin, Moder")]
     public class CreateController : Controller
     {
-        private readonly ApplicationContext db;
-        private readonly IHostingEnvironment appEnvironment;
-        public CreateController(ApplicationContext db, IHostingEnvironment appEnvironment)
+        private readonly ApplicationContext _context;
+        private readonly IHostingEnvironment _appEnvironment;
+        public CreateController(ApplicationContext context, IHostingEnvironment appEnvironment)
         {
-            this.db = db;
-            this.appEnvironment = appEnvironment;
+            _context = context;
+            _appEnvironment = appEnvironment;
         }
         public IActionResult Index() => View();
         [HttpGet]
         public async Task<IActionResult> AddBook()
         {
-            ViewBag.Authors = new SelectList(await db.Authors.ToListAsync(), "Id", "Name");
-            ViewBag.Subjects = new SelectList(await db.Subjects.ToListAsync(), "Id", "Name");
-            ViewBag.PublishingHouses = new SelectList(await db.PublishingHouses.ToListAsync(), "Id", "Name");
+            ViewBag.Authors = new SelectList(await _context.Authors.ToListAsync(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name");
+            ViewBag.PublishingHouses = new SelectList(await _context.PublishingHouses.ToListAsync(), "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -39,7 +39,7 @@ namespace LibraryAspNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Book book = await db.Books.FirstOrDefaultAsync(b => b.Name == model.Name || b.ISBN == model.ISBN);
+                Book book = await _context.Books.FirstOrDefaultAsync(b => b.Name == model.Name || b.ISBN == model.ISBN);
                 if (book == null)
                 {
                     string path = "images/noneBook",
@@ -48,38 +48,38 @@ namespace LibraryAspNetCore.Controllers
                     {
                         path = "images/" + model.Name.Replace(' ', '_');
                         type = model.Image.ContentType;
-                        using (FileStream fs = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
+                        using (FileStream fs = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                             await model.Image.CopyToAsync(fs);
                     }
-                    db.Books.Add(book = new Book
+                    _context.Books.Add(book = new Book
                     {
                         Name = model.Name,
-                        Author = model.AuthorsId == Guid.Empty ? await AddAuthor(model.AuthorsName) : await db.Authors.FirstOrDefaultAsync(a => a.Id == model.AuthorsId),
-                        PublishingHouse = await db.PublishingHouses.FirstOrDefaultAsync(a => a.Id == model.PublishingHouseId),
-                        Subject = await db.Subjects.FirstOrDefaultAsync(a => a.Id == model.SubjectId),
+                        Author = model.AuthorsId == Guid.Empty ? await AddAuthor(model.AuthorsName) : await _context.Authors.FirstOrDefaultAsync(a => a.Id == model.AuthorsId),
+                        PublishingHouse = await _context.PublishingHouses.FirstOrDefaultAsync(a => a.Id == model.PublishingHouseId),
+                        Subject = await _context.Subjects.FirstOrDefaultAsync(a => a.Id == model.SubjectId),
                         ISBN = model.ISBN,
                         YearOfPublishing = model.YearOfPublishing,
                         ImagePath = path,
                         ImageType = type
                     });
-                    await db.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                     ViewBag.Massage = "Книга успешно добавлена";
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.Authors = new SelectList(await db.Authors.ToListAsync(), "Id", "Name");
-            ViewBag.Subjects = new SelectList(await db.Subjects.ToListAsync(), "Id", "Name");
-            ViewBag.PublishingHouses = new SelectList(await db.PublishingHouses.ToListAsync(), "Id", "Name");
+            ViewBag.Authors = new SelectList(await _context.Authors.ToListAsync(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name");
+            ViewBag.PublishingHouses = new SelectList(await _context.PublishingHouses.ToListAsync(), "Id", "Name");
             return View(model);
         }
         [NonAction]
         public async Task<Author> AddAuthor(string authorName)
         {
-            Author author = await db.Authors.FirstOrDefaultAsync(a => a.Name == authorName);
+            Author author = await _context.Authors.FirstOrDefaultAsync(a => a.Name == authorName);
             if (author == null)
             {
-                db.Authors.Add(author = new Author { Name = authorName });
-                await db.SaveChangesAsync();
+                _context.Authors.Add(author = new Author { Name = authorName });
+                await _context.SaveChangesAsync();
             }
             return author;
         }
@@ -93,16 +93,16 @@ namespace LibraryAspNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Library library= await db.Libraries.FirstOrDefaultAsync(l => l.Name == model.Name || l.Address == model.Address);
+                Library library= await _context.Libraries.FirstOrDefaultAsync(l => l.Name == model.Name || l.Address == model.Address);
                 if (library == null)
                 {
-                    db.Libraries.Add(library = new Library 
+                    _context.Libraries.Add(library = new Library 
                     {
                         Name = model.Name,
                         Phone = model.Phone,
                         Address = model.Address,
                     });
-                    await db.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                     ViewBag.Massage = "Библиотека успешно добавлена";
                     return RedirectToAction("Index");
                 }
@@ -112,33 +112,65 @@ namespace LibraryAspNetCore.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBookInLibraries()
         {
-            ViewBag.Authors = new SelectList(await db.Books.ToListAsync(), "Id", "Name");
-            ViewBag.Subjects = new SelectList(await db.Libraries.ToListAsync(), "Id", "Name");
+            ViewBag.Authors = new SelectList(await _context.Books.ToListAsync(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(await _context.Libraries.ToListAsync(), "Id", "Name");
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddBookInLibraries(AddBooksInLibraryViewModel model)
+        public async Task<IActionResult> AddBookInLibraries(AddBookInLibrariesViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Book book = await db.Books.FirstOrDefaultAsync(b => b.Id == model.BookId);
+                Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == model.BookId);
                 if (book != null && model.Libraries.Count > 0)
                 {
                     foreach (var library in model.Libraries)
                     {
-                        db.BooksInLibraries.Add(new BookInLibrary
+                        _context.BooksInLibraries.Add(new BookInLibrary
                         {
                             Book = book,
-                            Library = await db.Libraries.FirstOrDefaultAsync(l => l.Id == library.LibraryId),
+                            Library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == library.LibraryId),
                             TotalQuantity = library.TotalQuantity,
                             CurrentQuantity = library.CurrentQuantity
                         });
                     }
-                    await db.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                 }
             }
-            ViewBag.Authors = new SelectList(await db.Authors.ToListAsync(), "Id", "Name");
-            ViewBag.Subjects = new SelectList(await db.Subjects.ToListAsync(), "Id", "Name");
+            ViewBag.Authors = new SelectList(await _context.Authors.ToListAsync(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name");
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddBooksInLibrary()
+        {
+            ViewBag.Authors = new SelectList(await _context.Books.ToListAsync(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(await _context.Libraries.ToListAsync(), "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddBooksInLibrary(AddBooksInLibraryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == model.LibraryId);
+                if (library != null && model.Books.Count > 0)
+                {
+                    foreach (var book in model.Books)
+                    {
+                        _context.BooksInLibraries.Add(new BookInLibrary
+                        {
+                            Book = await _context.Books.FirstOrDefaultAsync(b => b.Id == book.BookId),
+                            Library = library,
+                            TotalQuantity = book.TotalQuantity,
+                            CurrentQuantity = book.CurrentQuantity
+                        });
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+            ViewBag.Authors = new SelectList(await _context.Authors.ToListAsync(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name");
             return View(model);
         }
     }

@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace LibraryAspNetCore.ViewModels
+namespace LibraryAspNetCore.Controllers
 {
-    public class BookInLibrariesIdViewModel
+    public class BooksInLibraryViewModel
     {
-        public Guid LibraryId { get; set; }
+        public Guid BookId { get; set; }
         public int TotalQuantity { get; set; }
         public int CurrentQuantity { get; set; }
     }

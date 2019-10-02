@@ -13,10 +13,10 @@ namespace LibraryAspNetCore.Controllers
 
     public class HomeController : Controller
     {
-        private readonly ApplicationContext db;
-        public HomeController(ApplicationContext db)
+        private readonly ApplicationContext _context;
+        public HomeController(ApplicationContext context)
         {
-            this.db = db;
+            _context = context;
         }
         public IActionResult Index()
         {
@@ -25,20 +25,20 @@ namespace LibraryAspNetCore.Controllers
         public async Task<IActionResult> List()
         {
             List<InfoBookViewModel> info = new List<InfoBookViewModel>();
-            foreach(var item in await db.Books.ToListAsync())
-                info.Add(new InfoBookViewModel(item, await db.BooksInLibraries.Where(bl => bl.Book == item).ToListAsync()));
+            foreach(var item in await _context.Books.ToListAsync())
+                info.Add(new InfoBookViewModel(item, await _context.BooksInLibraries.Where(bl => bl.Book == item).ToListAsync()));
             return View(info);
         }
         public async Task<IActionResult> Info(Guid id)
         {
-            Book book = await db.Books
+            Book book = await _context.Books
                     .Include(b => b.Author)
                     .Include(b => b.Subject)
                     .Include(b => b.PublishingHouse)
                     .FirstOrDefaultAsync(b => b.Id == id);
             if (book != null)
             {
-                List<BookInLibrary> bookInLibraries = await db.BooksInLibraries.Where(bl => bl.Book == book).ToListAsync();
+                List<BookInLibrary> bookInLibraries = await _context.BooksInLibraries.Where(bl => bl.Book == book).ToListAsync();
                 return View(new InfoBookViewModel(book, bookInLibraries));
             }
             return RedirectToAction("List");
