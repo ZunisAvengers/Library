@@ -9,6 +9,7 @@ namespace LibraryAspNetCore.Models
     {
         public Guid Id { get; set; }
         public User User { get; set; }
+        public Library Library { get; set; }
         public List<OrderDetailse> OrderDetailse { get; set; }
         public DateTime DateOrder { get; set; }
         public DateTime DateGet { get; set; }

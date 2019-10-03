@@ -16,6 +16,10 @@ namespace LibraryAspNetCore.Models
         public DbSet<PublishingHouse> PublishingHouses { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookInLibrary> BooksInLibraries { get; set; }
+        public DbSet<Order> Orders{ get; set; }
+        public DbSet<OrderDetailse> OrderDetailses { get; set; }
+        public DbSet<BookCart> BookCarts { get; set; }
+        public DbSet<Cart> Cart { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             Database.EnsureCreated();

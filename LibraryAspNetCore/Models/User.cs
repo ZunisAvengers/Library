@@ -14,8 +14,13 @@ namespace LibraryAspNetCore.Models
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string EMail { get; set; }
+        public string Phone { get; set; }
         public Guid RoleId { get; set; }
         public Role Role { get; set; }
-        
+        public List<Order> Orders { get; set; }
+        public User()
+        {
+            Orders = new List<Order>();
+        }
     }
 }

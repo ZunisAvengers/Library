@@ -12,5 +12,10 @@ namespace LibraryAspNetCore.Models
         public Library Library{ get; set; }
         public int TotalQuantity { get; set; }
         public int CurrentQuantity { get; set; }
+        public List<OrderDetailse> OrderDetailse { get; set; }
+        public BookInLibrary()
+        {
+            OrderDetailse = new List<OrderDetailse>();
+        }
     }
 }
