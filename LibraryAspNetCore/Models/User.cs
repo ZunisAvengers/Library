@@ -17,6 +17,15 @@ namespace LibraryAspNetCore.Models
         public string Phone { get; set; }
         public Guid RoleId { get; set; }
         public Role Role { get; set; }
+        public bool? Delivered
+        {
+            get
+            {
+                foreach(var order in Orders)
+                    if (order.Notflicetion) return true;
+                return false;
+            }
+        }
         public List<Order> Orders { get; set; }
         public User()
         {

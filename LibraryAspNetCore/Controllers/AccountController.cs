@@ -16,9 +16,9 @@ namespace LibraryAspNetCore.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationContext _context;
-        public AccountController(ApplicationContext _context)
+        public AccountController(ApplicationContext context)
         {
-            this._context = _context;
+            _context = context;
         }
         [HttpGet]
         public IActionResult Login() => View();

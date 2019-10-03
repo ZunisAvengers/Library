@@ -25,6 +25,7 @@ namespace LibraryAspNetCore.Controllers
         {
             Order order = await _context.Orders
                 .Include(o => o.Library)
+                .Include(o => o.User)
                 .Include(o => o.OrderDetailse)
                     .ThenInclude(od => od.Book)
                         .ThenInclude(bl => bl.Book)
@@ -35,19 +36,21 @@ namespace LibraryAspNetCore.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpPost]
         public async Task<IActionResult> Close(Guid id)
         {
             Order order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
             if (order != null)
             {
-                if (order.Delivered) ViewBag.Message = "Заказ уже закрыт";
-                order.Delivered = true;
+                if (order.DeliveredInLibrary) ViewBag.Message = "Заказ уже закрыт";
+                order.DeliveredInLibrary = true;
                 _context.Orders.Update(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Info", "Home", id);
             }
             return RedirectToAction("Index");
         }
+        [HttpPost]
         public async Task<IActionResult> SetBook(Guid id)
         {
             Order order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
