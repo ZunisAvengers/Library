@@ -13,19 +13,13 @@ namespace LibraryAspNetCore.Models
         public List<OrderDetailse> OrderDetailse { get; set; }
         public DateTime DateOrder { get; set; }
         public DateTime DateGet { get; set; }
-        public DateTime DateSet
-        {
-            get
-            {
-                return DateGet.AddDays(7);
-            }
-        }
+        public bool IsGet { get; set; }
         public bool Delivered { get; set; }
         public bool Notflicetion
         {
             get
             {
-                return !Delivered && DateSet < DateTime.Now; 
+                return IsGet && !Delivered && DateGet.AddDays(7) < DateTime.Now; 
             }
         }
         public Order()
