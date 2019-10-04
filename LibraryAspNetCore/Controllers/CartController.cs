@@ -20,21 +20,17 @@ namespace LibraryAspNetCore.Controllers
         public IActionResult Index()
         {
             return View(_cart.ListBookCart());
-        }
-        [HttpGet]
-        public async Task<IActionResult> Order()
-        {
-            _cart.BookCarts = await _cart.ListBookCart();
-            if (_cart.BookCarts.Count > 0 && _cart.BookCarts != null) return View();
-            return RedirectToAction("Index");
-        }
+        }       
         [HttpPost]
-        public async Task<IActionResult> Order(Order order)
+        public async Task<IActionResult> Index(DateTime date)
         {
             if (ModelState.IsValid)
             {
+                Order order = new Order();
+                order.DateGet = date;
                 order.DateOrder = DateTime.Now;
                 order.User = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
+                //order.Library= await _context.Libraries.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
                 _cart.BookCarts = await _cart.ListBookCart();
                 foreach(var item in _cart.BookCarts)
                 {
@@ -49,7 +45,7 @@ namespace LibraryAspNetCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
-            return View(order);
+            return View();
         }
         [HttpPost]
         public async void AddCart(Guid id)

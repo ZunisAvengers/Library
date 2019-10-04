@@ -1,0 +1,43 @@
+﻿@model LibraryAspNetCore.Models.Order
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h2>Info</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOrder)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateGet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateGet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsGet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsGet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveredInLibrary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeliveredInLibrary)
+        </dd>
+    </dl>
+</div>
+<div>
+    <div class="btn btn-default"><a asp-action="Index">Back to List</a></div>
+    <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@Model.Id">Set Book</a></div>
+    <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@Model.Id">Close Order</a></div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LibraryAspNetCore.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateGet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsGet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveredInLibrary)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateGet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsGet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveredInLibrary)
+            </td>
+            <td>
+                <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@item.Id">Details</a></div>
+                <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@item.Id">Set Book</a></div>
+                <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@item.Id">Close Order</a></div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
