@@ -39,26 +39,70 @@ namespace LibraryAspNetCore.Models
                 new User{Id = Guid.NewGuid(), RoleId = Admin.Id, DateOfBirth = DateTime.Now, EMail="Admin@gmail.com", FirstName="", LastName="", Login="Admin", Password="adm"},
                 new User{Id = Guid.NewGuid(), RoleId = Moder.Id, DateOfBirth = DateTime.Now, EMail="Moder@gmail.com", FirstName="", LastName="", Login="Moder", Password="mod"}
             });
-            modelBuilder.Entity<Subject>().HasData(new Subject[]
-            {
-                new Subject{Id = Guid.NewGuid(), Name="Adventure"},
-                new Subject{Id = Guid.NewGuid(), Name="Roman"},
-                new Subject{Id = Guid.NewGuid(), Name="Horror"}
+            foreach (string name in subject) modelBuilder.Entity<Subject>().HasData(new Subject { Id = Guid.NewGuid(), Name = name });
+            foreach (string name in authors) modelBuilder.Entity<Author>().HasData(new Author{ Id = Guid.NewGuid(), Name = name });
+            foreach (string name in publishingHouse) modelBuilder.Entity<PublishingHouse>().HasData(new PublishingHouse{ Id = Guid.NewGuid(), Name = name });
+            modelBuilder.Entity<Library>().HasData(new Library[] 
+            { 
+                new Library{ Id = Guid.NewGuid(), Address = "Random Addres1", Name="Пушкинская библиотека", Phone = "2158484257" },
+                new Library{ Id = Guid.NewGuid(), Address = "Random Addres2", Name="Детская библиотека", Phone = "88881584257" },
+                new Library{ Id = Guid.NewGuid(), Address = "Random Addres3", Name="Новая библиотека", Phone = "9988484257" }
             });
-            modelBuilder.Entity<Author>().HasData(new Author[]
-            {
-                new Author{Id = Guid.NewGuid(), Name="А.С.Пушкин"},
-                new Author{Id = Guid.NewGuid(), Name="В.В.Маяковский"},
-                new Author{Id = Guid.NewGuid(), Name="И.А.Бунин"}
-            });
-            modelBuilder.Entity<PublishingHouse>().HasData(new PublishingHouse[]
-            {
-                new PublishingHouse{Id = Guid.NewGuid(), Name="Penguin"},
-                new PublishingHouse{Id = Guid.NewGuid(), Name="Samokat Publishing House"},
-                new PublishingHouse{Id = Guid.NewGuid(), Name="COLORADO’S SPECIALTY PUBLISHER"}
-            });
-
             base.OnModelCreating(modelBuilder);
+            
         }
+        string[] authors = new string[]
+        {
+            "Лев Толстой",
+            "Федор Достоевский",
+            "Николай Гоголь",
+            "Иван Бунин",
+            "Александр Пушкин",
+            "Антон Чехов",
+            "Михаил Булгаков",
+            "Владимир Набоков"
+        };
+        string[] subject = new string[]
+        {
+            "Фэнтези",
+            "Женский роман",
+            "Детективы – из российской жизни",
+            "Кулинария",
+            "Книги для детей – чем больше картинок, тем лучше",
+            "Учебная и образовательная литература, литература по саморазвитию",
+            "Бизнес-книга",
+            "Эзотерика",
+            "Мистический роман",
+            "Патриотические и псевдоисторические романы"
+        };
+        string[] publishingHouse = new string[]
+        {
+            "Новое литературное обозрение",
+            "Новый мир",
+            "Октябрь",
+            "Урал",
+            "Арион",
+            "Воздух",
+            "Волга",
+            "Дети Ра"
+        };
+        string[] bookName = new string[]
+        {
+            "Вой­на и мир",
+            "Улисс",
+            "1984",
+            "Лоли­та",
+            "Шум и ярость",
+            "Неви­дим­ка",
+            "К мая­ку",
+            "Илли­а­да и Одис­сея",
+            "Гор­дость и пред­убеж­де­ние",
+            "Боже­ствен­ная коме­дия",
+            "Кен­тер­бе­рий­ские рас­ска­зы",
+            "Путе­ше­ст­вия Гул­ли­ве­ра",
+            "Мид­дл­марч",
+            "Рас­пад",
+            "Над про­па­стью во ржи"
+        };
     }
 }

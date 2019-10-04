@@ -51,5 +51,20 @@ namespace LibraryAspNetCore.Controllers
             }
             return View(order);
         }
+        [HttpPost]
+        public async void AddCart(Guid id)
+        {
+            BookInLibrary book = await _context.BooksInLibraries.FirstOrDefaultAsync(bl => bl.Id == id);
+            if (book != null && book.CurrentQuantity > 0)
+            {
+                _cart.AddCart(book);
+            }
+            ViewBag.Massage = "Данной книги нет в наличии";
+        }
+        [HttpPost]
+        public void RemoveCart(Guid id)
+        {
+            _cart.RemoveCart(id);
+        }
     }
 }

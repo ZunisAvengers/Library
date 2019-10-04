@@ -29,3 +29,4 @@ C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netco
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\LibraryAspNetCore.dll
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\LibraryAspNetCore.pdb
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\LibraryAspNetCore.csproj.CopyComplete
+C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Home\Info.cshtml.g.cs

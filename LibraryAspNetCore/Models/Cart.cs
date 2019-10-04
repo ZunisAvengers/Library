@@ -33,11 +33,16 @@ namespace LibraryAspNetCore.Models
                 BookCartId = BookCartId,
                 Book = book
             });
+            book.CurrentQuantity--;
+            _context.BooksInLibraries.Update(book);
             await _context.SaveChangesAsync();
         }
         public async void RemoveCart(Guid id)
         {
-            _context.BookCarts.Remove(await _context.BookCarts.FirstOrDefaultAsync(bc => bc.Id == id));
+            BookCart book = await _context.BookCarts.Include(bc => bc.Book).FirstOrDefaultAsync(bc => bc.Id == id);
+            book.Book.CurrentQuantity++;
+            _context.BooksInLibraries.Update(book.Book);
+            _context.BookCarts.Remove(book);
             await _context.SaveChangesAsync();
             
         }

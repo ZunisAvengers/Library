@@ -1,0 +1,43 @@
+﻿@model LibraryAspNetCore.ViewModels.InfoBookViewModel
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h2>Info</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.YearOfPublishing)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.YearOfPublishing)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.ISBN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.ISBN)
+        </dd>
+    </dl>
+    <h3>Имеется в:</h3>
+    <ul>
+        @foreach (var library in Model.Libraries)
+        {
+            <li>@library.Library.Name (@library.CurrentQuantity)</li>
+        }
+    </ul>
+</div>
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>

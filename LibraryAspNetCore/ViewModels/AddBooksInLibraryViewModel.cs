@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryAspNetCore.Controllers
+namespace LibraryAspNetCore.ViewModels
 {
     public class AddBooksInLibraryViewModel
     {
