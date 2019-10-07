@@ -1,0 +1,17 @@
+﻿@model IEnumerable<LibraryAspNetCore.Models.Library>
+<h2>Библиотеки</h2>
+<table class="table">
+    <tr>
+        <td>Название</td>
+        <td>Адрес</td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Address</td>
+            <td><a asp-controller="Library" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a></td>
+        </tr>
+    }
+</table>

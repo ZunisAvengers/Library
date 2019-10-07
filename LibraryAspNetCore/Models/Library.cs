@@ -11,7 +11,6 @@ namespace LibraryAspNetCore.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        //public int TotalUniqueBooks { get; set; }
         public List<BookInLibrary> BookInLibrares { get; set; }
         public Library()
         {

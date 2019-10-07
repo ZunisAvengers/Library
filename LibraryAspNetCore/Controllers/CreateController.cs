@@ -27,9 +27,9 @@ namespace LibraryAspNetCore.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBook()
         {
-            ViewBag.Authors = new SelectList(await _context.Authors.ToListAsync(), "Id", "Name");
-            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name");
-            ViewBag.PublishingHouses = new SelectList(await _context.PublishingHouses.ToListAsync(), "Id", "Name");
+            ViewBag.Authors = new SelectList(await _context.Authors.OrderBy(n => n.Name).ToListAsync(), "Id", "Name", "Выберете Автора");
+            ViewBag.Subjects = new SelectList(await _context.Subjects.OrderBy(n => n.Name).ToListAsync(), "Id", "Name", "Выберете Жанр");
+            ViewBag.PublishingHouses = new SelectList(await _context.PublishingHouses.OrderBy(n => n.Name).ToListAsync(), "Id", "Name", "Выберете Издательство");
             return View();
         }
         [HttpPost]
@@ -126,6 +126,18 @@ namespace LibraryAspNetCore.Controllers
             ViewBag.PublishingHouses = new SelectList(await _context.PublishingHouses.ToListAsync(), "Id", "Name");
             return View(model);
         }
+        public async Task<IActionResult> DeleteBook(Guid id)
+        {
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (book != null)
+            {
+                foreach (var item in await _context.BooksInLibraries.Where(bl => bl.Book == book).ToListAsync())
+                    _context.BooksInLibraries.Remove(item);
+                _context.Books.Remove(book);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "Home");
+        }
         [NonAction]
         public async Task<Author> AddAuthor(string authorName)
         {
@@ -172,25 +184,34 @@ namespace LibraryAspNetCore.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> EditLibrary(AddLibraryViewModel model)
+        public async Task<IActionResult> EditLibrary(Library model)
         {
             if (ModelState.IsValid)
             {
-                Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Name == model.Name || l.Address == model.Address);
+                Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == model.Id);
                 if (library != null)
                 {
-                    _context.Libraries.Update(library = new Library
-                    {
-                        Name = model.Name,
-                        Phone = model.Phone,
-                        Address = model.Address,
-                    });
+                    library.Name = model.Name;
+                    library.Phone = model.Phone;
+                    library.Address = model.Address;
+                    _context.Libraries.Update(library);
                     await _context.SaveChangesAsync();
                     //ViewBag.Massage = "Библиотека успешно изменена";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Info","Library", library.Id);
                 }
             }
             return View(model);
+        }
+        
+        public async Task<IActionResult> DeleteLibrary(Guid id)
+        {
+            Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == id);
+            if (library != null)
+            {
+                _context.Libraries.Remove(library);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "Library");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace LibraryAspNetCore.Controllers
         public async Task<IActionResult> Info(Guid id)
         {
             Order order = await _context.Orders
-                .Include(o => o.Library)
+                //.Include(o => o.Library)
                 .Include(o => o.User)
                 .Include(o => o.OrderDetailse)
                     .ThenInclude(od => od.Book)

@@ -46,9 +46,10 @@ namespace LibraryAspNetCore.Models
             await _context.SaveChangesAsync();
             
         }
-        public async Task<List<BookCart>> ListBookCart() => await _context.BookCarts
+        public async Task<List<BookCart>> GetBooks() => await _context.BookCarts
                 .Where(bc => bc.BookCartId == BookCartId)
                 .Include(bc => bc.Book)
+                    .ThenInclude(b => b.Book)
                 .ToListAsync();
     }
 }

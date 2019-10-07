@@ -9,6 +9,7 @@
 <div>
     <h4>Book</h4>
     <hr />
+    <img src="~/@Model.Book.ImagePath" typeof="@Model.Book.ImageType" align="right"/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Book.Name)
@@ -38,6 +39,10 @@
     </ul>
 </div>
 <div>
-    
+    @if (!User.IsInRole("User"))
+    {
+        <a asp-controller="Create" asp-action="DeleteBook" asp-route-id="@Model.Book.Id"><div class="btn btn-danger">Удалить</div></a>
+        <a asp-controller="Create" asp-action="EditBook" asp-route-id="@Model.Book.Id"><div class="btn btn-default">Изменить</div></a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

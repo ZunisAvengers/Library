@@ -20,11 +20,27 @@ namespace LibraryAspNetCore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<InfoBookViewModel> info = new List<InfoBookViewModel>();
-            foreach (var item in await _context.Books.ToListAsync())
-                info.Add(new InfoBookViewModel(item, await _context.BooksInLibraries.Where(bl => bl.Book == item).ToListAsync()));
-            return View(info);
-            //return View(await _context.Books.ToListAsync());
+            //IQueryable<Book> books = _context.Books.Include(b => b.Author).Include(b => b.Subject);
+            //List<InfoBookViewModel> info = new List<InfoBookViewModel>();
+            //foreach (var item in books)
+            //    info.Add(new InfoBookViewModel(item, 
+            //        await _context.BooksInLibraries
+            //        .Include(b => b.Book)
+            //            .ThenInclude(bl => bl.Author)
+            //        .Include(b => b.Book)
+            //            .ThenInclude(bl => bl.Subject)
+            //        .Include(b => b.Book)
+            //            .ThenInclude(bl => bl.PublishingHouse)
+            //        .Include(b => b.Library)
+            //        .Where(bl => bl.Book == item)
+            //        .ToListAsync()));
+            //return View(info);
+
+            return View(await _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.PublishingHouse)
+                .Include(b => b.Subject)
+                .ToListAsync());
         }
         public async Task<IActionResult> Info(Guid id)
         {
@@ -32,10 +48,11 @@ namespace LibraryAspNetCore.Controllers
                     .Include(b => b.Author)
                     .Include(b => b.Subject)
                     .Include(b => b.PublishingHouse)
+                    .Include(b => b.BookInLibrares)
                     .FirstOrDefaultAsync(b => b.Id == id);
             if (book != null)
             {
-                List<BookInLibrary> bookInLibraries = await _context.BooksInLibraries.Where(bl => bl.Book == book).ToListAsync();
+                List<BookInLibrary> bookInLibraries = await _context.BooksInLibraries.Include(bl => bl.Library).Where(bl => bl.Book == book).ToListAsync();
                 return View(new InfoBookViewModel(book, bookInLibraries));
             }
             return RedirectToAction("Index");

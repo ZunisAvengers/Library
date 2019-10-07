@@ -1,4 +1,6 @@
-﻿@model IEnumerable<LibraryAspNetCore.ViewModels.InfoBookViewModel>
+﻿@model IEnumerable<LibraryAspNetCore.Models.Book>
+@using LibraryAspNetCore.Models
+@using LibraryAspNetCore.ViewModels
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,24 +11,32 @@
         <td>Название</td>
         <td>Автор</td>
         <td>Жанр</td>
-        <td>Имеется в наличии</td>
+        <td>Издатель</td>
         <td></td>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Book.Name</td>
-            <td>@item.Book.Author.Name</td>
-            <td>@item.Book.Subject.Name</td>
-            <td>
+            <td>@item.Name</td>
+            <td>@item.Author.Name</td>
+            <td>@item.Subject.Name</td>
+            <td>@item.PublishingHouse.Name</td>
+           @* <td>
                 <ul>
-                    @foreach (var library in item.Libraries)
+                    @if (item.Libraries != null || item.Libraries.Count > 0) 
                     {
-                        <li>@library.Library.Name</li>
+                        foreach (InfoBookInLibraryViewModel library in item.Libraries)
+                        {
+                            <li>@library.Library.Name</li>
+                        }
+                    }
+                    else
+                    {
+                        < li > Ещё нет в библиотеках </ li >
                     }
                 </ul>
-            </td>
-            <td><a asp-controller="Home" asp-action="Info" asp-route="@item.Book.Id"><div class="btn btn-default">Подробнее</div></a></td>
+            </td>*@
+            <td><a asp-controller="Home" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a></td>
         </tr>
     }
 

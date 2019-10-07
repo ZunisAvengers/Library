@@ -17,12 +17,17 @@ namespace LibraryAspNetCore.Controllers
             _cart = cart;
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_cart.ListBookCart());
+            //ViewBag.Library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == _cart.LibraryId);
+            //List<BookInLibrary> books = new List<BookInLibrary>();
+            //List<BookCart> carts = await _cart.GetBooks();
+            //foreach (var book in carts) books.Add(await _context.BooksInLibraries.FirstOrDefaultAsync(b => b == book.Book));
+            _cart.BookCarts = await _cart.GetBooks();
+            return View(_cart);
         }       
-        [HttpPost]
-        public async Task<IActionResult> Index(DateTime date)
+        
+        public async Task<IActionResult> Order(DateTime date)
         {
             if (ModelState.IsValid)
             {
@@ -31,8 +36,8 @@ namespace LibraryAspNetCore.Controllers
                 order.DateOrder = DateTime.Now;
                 order.User = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
                 //order.Library= await _context.Libraries.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
-                _cart.BookCarts = await _cart.ListBookCart();
-                foreach(var item in _cart.BookCarts)
+                _cart.BookCarts = await _cart.GetBooks();
+                foreach (var item in _cart.BookCarts)
                 {
                     _context.OrderDetailses.Add(new OrderDetailse
                     {
@@ -45,9 +50,9 @@ namespace LibraryAspNetCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("Index");
         }
-        [HttpPost]
+        
         public async void AddCart(Guid id)
         {
             BookInLibrary book = await _context.BooksInLibraries.FirstOrDefaultAsync(bl => bl.Id == id);
@@ -57,7 +62,7 @@ namespace LibraryAspNetCore.Controllers
             }
             ViewBag.Massage = "Данной книги нет в наличии";
         }
-        [HttpPost]
+        
         public void RemoveCart(Guid id)
         {
             _cart.RemoveCart(id);

@@ -145,7 +145,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(932, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "498fc9a465d347d5a86cd0af12a58d50", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8eee867cb96d4c6bb2b45c4e4630618d", async() => {
                 BeginContext(954, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
@@ -167,7 +167,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</div>\r\n    <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1011, 84, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7bfa1e61e8bf46aa989e8cce72d2d8a7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "67eadf14144e468b91801a7f0076b863", async() => {
                 BeginContext(1083, 8, true);
                 WriteLiteral("Set Book");
                 EndContext();
@@ -204,7 +204,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</div>\r\n    <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1136, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "76d67d964c32445281ce6eda1fa41431", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "64b201b0ff374998ae72eb2f3ca32f05", async() => {
                 BeginContext(1208, 11, true);
                 WriteLiteral("Close Order");
                 EndContext();
