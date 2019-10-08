@@ -48,7 +48,7 @@ namespace LibraryAspNetCore.Controllers
                 }
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Info", "Orders", order.Id);
             }
             return RedirectToAction("Index");
         }

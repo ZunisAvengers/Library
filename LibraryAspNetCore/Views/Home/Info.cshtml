@@ -43,6 +43,7 @@
             @foreach (var library in Model.Libraries)
             {
                 <li>@library.Library.Name (Книг в наличии: @library.CurrentQuantity)</li>
+                <a asp-controller="Cart" asp-action="AddCart" asp-route-id="@library.BookinLibraryId"><div class="btn btn-success">Добавить в корзину</div></a>
             }
         </ul>
     }

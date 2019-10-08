@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LibraryAspNetCore.Models.Order>
+<h2>Ваши заказы</h2>
+<table class="table">
+    <tr>
+        <td>Дата заказа</td>
+        <td>Список книг</td>
+        <td>Статус</td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.DateOrder</td>
+    <td>@item.OrderDetailse.Count</td>
+    <td>
+        @if (!item.IsGet)
+        {
+            <p>Вы не забрали книги</p>
+        }
+        else if (item.DeliveredInLibrary)
+        {
+            <p>Вы не вернули книги</p>
+        }
+        else if (item.Notflicetion)
+        {
+            <p>Вы должник</p>
+        }
+    </td>
+    <td>
+    <td>
+        <a asp-controller="Orders" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a></td>
+    </td>
+</tr>
+    }
+</table>

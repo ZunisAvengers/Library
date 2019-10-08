@@ -14,6 +14,7 @@ namespace LibraryAspNetCore.ViewModels
     public class InfoBookInLibraryViewModel
     {
         public Library Library { get; set; }
+        public Guid BookinLibraryId { get; set; }
         public int TotalQuantity { get; set; }
         public int CurrentQuantity { get; set; }
         

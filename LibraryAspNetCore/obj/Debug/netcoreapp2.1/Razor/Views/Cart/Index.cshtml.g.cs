@@ -67,7 +67,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n<h2>Ваши заказы из Библиотеки </h2>\r\n");
             EndContext();
             BeginContext(150, 202, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b42a7be165d741e99c1de789c518d6b6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5df4674beee48d58fdbeffb2a0f9503", async() => {
                 BeginContext(211, 134, true);
                 WriteLiteral("\r\n    <h3>Выберете когда вы заберёте книги:</h3>\r\n    <input type=\"datetime-local\" />\r\n    <input value=\"Заказать!!\" type=\"submit\"/>\r\n");
                 EndContext();
@@ -104,7 +104,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("        <tr>\r\n            <td>");
             EndContext();
             BeginContext(525, 133, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72451c48ba4f4c9dbefae5ba1a211d8f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1c152744570b48319a83dac5ab63dd3d", async() => {
                 BeginContext(599, 29, true);
                 WriteLiteral("<div class=\"btn btn-default\">");
                 EndContext();
@@ -147,7 +147,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</td>\r\n            <td>\r\n                ");
             EndContext();
             BeginContext(699, 131, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37e270b1c3cc491f83962ec7e4836e13", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "85435488b21b49e5bce325a2ad6a9ee0", async() => {
                 BeginContext(774, 52, true);
                 WriteLiteral("<div class=\"btn btn-danger\">Удалить из корзины</div>");
                 EndContext();

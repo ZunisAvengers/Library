@@ -18,7 +18,7 @@ namespace LibraryAspNetCore.Controllers
             _context = context;
         }
         public async Task<IActionResult> Index() =>
-            View(_context.Orders
+            View(await _context.Orders
                 .Include(o => o.User)
                 .Include(o => o.OrderDetailse)
                 .Where(o => o.User.Login == User.Identity.Name)

@@ -79,6 +79,7 @@ namespace LibraryAspNetCore.Controllers
                 foreach (var item in bookInLibrary)
                     infoBooks.Add(new InfoBookInLibraryViewModel
                     {
+                        BookinLibraryId = item.Id,
                         Library = await _context.Libraries.Include(l => l.BookInLibrares).FirstOrDefaultAsync(l => l.Id == item.Library.Id),
                         TotalQuantity = item.TotalQuantity,
                         CurrentQuantity = item.CurrentQuantity
