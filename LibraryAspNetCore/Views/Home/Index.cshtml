@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LibraryAspNetCore.Models.Book>
+﻿@model IEnumerable<LibraryAspNetCore.ViewModels.InfoBookViewModel>
 @using LibraryAspNetCore.Models
 @using LibraryAspNetCore.ViewModels
 @{
@@ -12,32 +12,33 @@
         <td>Автор</td>
         <td>Жанр</td>
         <td>Издатель</td>
+        <td>Библиотеки</td>
         <td></td>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Name</td>
-            <td>@item.Author.Name</td>
-            <td>@item.Subject.Name</td>
-            <td>@item.PublishingHouse.Name</td>
-            @* <td>
-                    <ul>
-                        @if (item.Libraries != null || item.Libraries.Count > 0)
-                        {
-                            foreach (InfoBookInLibraryViewModel library in item.Libraries)
-                            {
-                                <li>@library.Library.Name</li>
-                            }
-                        }
-                        else
-                        {
-                            < li > Ещё нет в библиотеках </ li >
-                        }
-                    </ul>
-                </td>*@
+            <td>@item.Book.Name</td>
+            <td>@item.Book.Author.Name</td>
+            <td>@item.Book.Subject.Name</td>
+            <td>@item.Book.PublishingHouse.Name</td>
             <td>
-                <a asp-controller="Home" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a>
+                <ul>
+                    @if (item.Libraries != null && item.Libraries.Count > 0)
+                    {
+                        foreach (InfoBookInLibraryViewModel library in item.Libraries)
+                        {
+                            <li>@library.Library.Name</li>
+                        }
+                    }
+                    else
+                    {
+                        <li> Ещё нет в библиотеках </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <a asp-controller="Home" asp-action="Info" asp-route-id="@item.Book.Id"><div class="btn btn-default">Подробнее</div></a>
             </td>
         </tr>
     }

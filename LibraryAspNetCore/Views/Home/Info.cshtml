@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Info";
+    string href = "";
+    if (Model.Book.ImageType == "image/jpg") { href = Model.Book.ImagePath + ".jpg"; }
+    else if (Model.Book.ImageType == "image/png") { href = Model.Book.ImagePath + ".png"; }
 }
 
 <h2>Info</h2>
@@ -9,41 +12,52 @@
 <div>
     <h4>Book</h4>
     <hr />
-    <img src="~/@Model.Book.ImagePath" typeof="@Model.Book.ImageType" align="right"/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Book.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Book.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Book.YearOfPublishing)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Book.YearOfPublishing)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Book.ISBN)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Book.ISBN)
-        </dd>
-    </dl>
-    <h3>Имеется в:</h3>
-    <ul>
-        @foreach (var library in Model.Libraries)
-        {
-            <li>@library.Library.Name (@library.CurrentQuantity)</li>
-        }
-    </ul>
+    <div style="display:flex;justify-content:space-between">
+
+        <dl class="dl-horizontal" style="">
+            <dt>
+                @Html.DisplayNameFor(model => model.Book.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Book.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Book.YearOfPublishing)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Book.YearOfPublishing)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Book.ISBN)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Book.ISBN)
+            </dd>
+        </dl>
+        <img src="~/@href" typeof="@Model.Book.ImageType" class="img-circle img-thumbnail" align="right" />
+    </div>
+    @if (Model.Libraries.Count > 0 && Model.Libraries != null)
+    {
+        <h4>Имеется в:</h4>
+        <ul>
+            @foreach (var library in Model.Libraries)
+            {
+                <li>@library.Library.Name (Книг в наличии: @library.CurrentQuantity)</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h4>Данной книги ещё нет в библиотеках</h4>
+    }
 </div>
+<br>
+<br>
 <div>
     @if (!User.IsInRole("User"))
     {
         <a asp-controller="Create" asp-action="DeleteBook" asp-route-id="@Model.Book.Id"><div class="btn btn-danger">Удалить</div></a>
         <a asp-controller="Create" asp-action="EditBook" asp-route-id="@Model.Book.Id"><div class="btn btn-default">Изменить</div></a><br>
     }
-    
     <a asp-action="Index">Back to List</a>
 </div>

@@ -45,16 +45,21 @@ namespace LibraryAspNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == model.LibraryId);
-                _context.BooksInLibraries.Add(new BookInLibrary
+                BookInLibrary book = await _context.BooksInLibraries.FirstOrDefaultAsync(b => b.Book.Id == model.BookId && b.Library.Id == model.LibraryId);
+                if (book != null)
                 {
-                    Library = library,
-                    Book = await _context.Books.FirstOrDefaultAsync(b => b.Id == model.BookId),
-                    TotalQuantity = model.TotalQuantity,
-                    CurrentQuantity = model.TotalQuantity
-                });
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Info", library.Id);
+                    Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == model.LibraryId);
+                    _context.BooksInLibraries.Add(new BookInLibrary
+                    {
+                        Library = library,
+                        Book = await _context.Books.FirstOrDefaultAsync(b => b.Id == model.BookId),
+                        TotalQuantity = model.TotalQuantity,
+                        CurrentQuantity = model.TotalQuantity
+                    });
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Info", library.Id);
+                }
+                ModelState.AddModelError("", "Вы пытаетесь добавить книгу, которая уже есть в данной библиотеки");
             }
             ViewBag.Books = new SelectList(await _context.Books.ToListAsync(), "Id", "Name");
             return View(model);

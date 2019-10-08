@@ -36,11 +36,33 @@ namespace LibraryAspNetCore.Controllers
             //        .ToListAsync()));
             //return View(info);
 
-            return View(await _context.Books
-                .Include(b => b.Author)
-                .Include(b => b.PublishingHouse)
-                .Include(b => b.Subject)
-                .ToListAsync());
+            //return View(await _context.Books
+            //    .Include(b => b.Author)
+            //    .Include(b => b.PublishingHouse)
+            //    .Include(b => b.Subject)
+            //    .ToListAsync());
+
+            List<Book> books = await _context.Books
+                    .Include(b => b.Author)
+                    .Include(b => b.Subject)
+                    .Include(b => b.PublishingHouse)
+                    .Include(b => b.BookInLibrares)
+                    .ToListAsync();
+            List<InfoBookViewModel> result = new List<InfoBookViewModel>();
+            foreach (var Item in books)
+            {
+                List<BookInLibrary> bookInLibrary = await _context.BooksInLibraries.Include(bl => bl.Library).Where(bl => bl.Book == Item).ToListAsync();
+                List<InfoBookInLibraryViewModel> infoBooks = new List<InfoBookInLibraryViewModel>();
+                foreach (var item in bookInLibrary)
+                    infoBooks.Add(new InfoBookInLibraryViewModel
+                    {
+                        Library = await _context.Libraries.Include(l => l.BookInLibrares).FirstOrDefaultAsync(l => l.Id == item.Library.Id),
+                        TotalQuantity = item.TotalQuantity,
+                        CurrentQuantity = item.CurrentQuantity
+                    });
+                result.Add( new InfoBookViewModel { Book = Item, Libraries = infoBooks });
+            }
+            return View(result);
         }
         public async Task<IActionResult> Info(Guid id)
         {
@@ -52,9 +74,9 @@ namespace LibraryAspNetCore.Controllers
                     .FirstOrDefaultAsync(b => b.Id == id);
             if (book != null)
             {
-                List<BookInLibrary> books = await _context.BooksInLibraries.Include(bl => bl.Library).Where(bl => bl.Book == book).ToListAsync();
+                List<BookInLibrary> bookInLibrary = await _context.BooksInLibraries.Include(bl => bl.Library).Where(bl => bl.Book == book).ToListAsync();
                 List<InfoBookInLibraryViewModel> infoBooks = new List<InfoBookInLibraryViewModel>();
-                foreach (var item in books)
+                foreach (var item in bookInLibrary)
                     infoBooks.Add(new InfoBookInLibraryViewModel
                     {
                         Library = await _context.Libraries.Include(l => l.BookInLibrares).FirstOrDefaultAsync(l => l.Id == item.Library.Id),
