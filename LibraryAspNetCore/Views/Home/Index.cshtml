@@ -21,23 +21,29 @@
             <td>@item.Author.Name</td>
             <td>@item.Subject.Name</td>
             <td>@item.PublishingHouse.Name</td>
-           @* <td>
-                <ul>
-                    @if (item.Libraries != null || item.Libraries.Count > 0) 
-                    {
-                        foreach (InfoBookInLibraryViewModel library in item.Libraries)
+            @* <td>
+                    <ul>
+                        @if (item.Libraries != null || item.Libraries.Count > 0)
                         {
-                            <li>@library.Library.Name</li>
+                            foreach (InfoBookInLibraryViewModel library in item.Libraries)
+                            {
+                                <li>@library.Library.Name</li>
+                            }
                         }
-                    }
-                    else
-                    {
-                        < li > Ещё нет в библиотеках </ li >
-                    }
-                </ul>
-            </td>*@
-            <td><a asp-controller="Home" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a></td>
+                        else
+                        {
+                            < li > Ещё нет в библиотеках </ li >
+                        }
+                    </ul>
+                </td>*@
+            <td>
+                <a asp-controller="Home" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a>
+            </td>
         </tr>
     }
 
 </table>
+@if (!User.IsInRole("User"))
+{
+    <a asp-controller="Create" asp-action="AddBook" ><div class="btn btn-success">Добавить книгу</div></a>
+}

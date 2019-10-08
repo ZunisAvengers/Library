@@ -1,0 +1,23 @@
+﻿@model LibraryAspNetCore.ViewModels.AddBookInLibraryViewModel
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddBooks" asp-controller="Library" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@Model.LibraryId" asp-for="LibraryId">
+            <div class="form-group">
+                <label asp-for="LibraryName" class="control-label">Добавление книг для " @Model.LibraryName "</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Выберете книгу</label>
+                <select asp-for="BookId" class="form-control" asp-items="ViewBag.Books"><option selected>Выберете Книгу</option></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalQuantity" class="control-label">Выберете колличество</label>
+                <input asp-for="TotalQuantity" type="number" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>  

@@ -42,7 +42,8 @@
     @if (!User.IsInRole("User"))
     {
         <a asp-controller="Create" asp-action="DeleteBook" asp-route-id="@Model.Book.Id"><div class="btn btn-danger">Удалить</div></a>
-        <a asp-controller="Create" asp-action="EditBook" asp-route-id="@Model.Book.Id"><div class="btn btn-default">Изменить</div></a>
+        <a asp-controller="Create" asp-action="EditBook" asp-route-id="@Model.Book.Id"><div class="btn btn-default">Изменить</div></a><br>
     }
+    
     <a asp-action="Index">Back to List</a>
 </div>

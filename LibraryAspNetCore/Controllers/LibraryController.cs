@@ -36,28 +36,25 @@ namespace LibraryAspNetCore.Controllers
             if (library != null)
             {
                 ViewBag.Books = new SelectList(await _context.Books.ToListAsync(), "Id", "Name");
-                return View(library);
+                return View(new AddBookInLibraryViewModel { LibraryId = library.Id, LibraryName = library.Name });
             }
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> AddBooks(AddBooksInLibraryViewModel model)
+        public async Task<IActionResult> AddBookInLibrary(AddBookInLibraryViewModel model)
         {
-            if (ModelState.IsValid && model.Books != null && model.Books.Count > 0)
+            if (ModelState.IsValid)
             {
                 Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == model.LibraryId);
-                foreach (var book in model.Books)
+                _context.BooksInLibraries.Add(new BookInLibrary
                 {
-                    _context.BooksInLibraries.Add(new BookInLibrary
-                    {
-                        Library = library,
-                        Book = await _context.Books.FirstOrDefaultAsync(l => l.Id == book.BookId),
-                        TotalQuantity = book.TotalQuantity,
-                        CurrentQuantity = book.TotalQuantity
-                    });
-                }
+                    Library = library,
+                    Book = await _context.Books.FirstOrDefaultAsync(b => b.Id == model.BookId),
+                    TotalQuantity = model.TotalQuantity,
+                    CurrentQuantity = model.TotalQuantity
+                });
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Info", "Library", library);
+                return RedirectToAction("Info", library.Id);
             }
             ViewBag.Books = new SelectList(await _context.Books.ToListAsync(), "Id", "Name");
             return View(model);

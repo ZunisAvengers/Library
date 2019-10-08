@@ -96,8 +96,8 @@ namespace LibraryAspNetCore.Controllers
                 Book book = await _context.Books.FirstOrDefaultAsync(b => b.Name == model.Name || b.ISBN == model.ISBN);
                 if (book != null)
                 {
-                    string path = "images/noneBook",
-                        type = "image/jpg";
+                    string path = book.ImagePath,
+                        type = book.ImageType;
                     if (model.Image != null)
                     {
                         path = "images/" + model.Name.Replace(' ', '_');
@@ -105,17 +105,15 @@ namespace LibraryAspNetCore.Controllers
                         using (FileStream fs = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                             await model.Image.CopyToAsync(fs);
                     }
-                    _context.Books.Update(book = new Book
-                    {
-                        Name = model.Name,
-                        Author = model.AuthorsId == Guid.Empty ? await AddAuthor(model.AuthorsName) : await _context.Authors.FirstOrDefaultAsync(a => a.Id == model.AuthorsId),
-                        PublishingHouse = await _context.PublishingHouses.FirstOrDefaultAsync(a => a.Id == model.PublishingHouseId),
-                        Subject = await _context.Subjects.FirstOrDefaultAsync(a => a.Id == model.SubjectId),
-                        ISBN = model.ISBN,
-                        YearOfPublishing = model.YearOfPublishing,
-                        ImagePath = path,
-                        ImageType = type
-                    });
+                    book.Name = model.Name;
+                    book.Author = model.AuthorsId == Guid.Empty ? await AddAuthor(model.AuthorsName) : await _context.Authors.FirstOrDefaultAsync(a => a.Id == model.AuthorsId);
+                    book.PublishingHouse = await _context.PublishingHouses.FirstOrDefaultAsync(a => a.Id == model.PublishingHouseId);
+                    book.Subject = await _context.Subjects.FirstOrDefaultAsync(a => a.Id == model.SubjectId);
+                    book.ISBN = model.ISBN;
+                    book.YearOfPublishing = model.YearOfPublishing;
+                    book.ImagePath = path;
+                    book.ImageType = type;
+                    _context.Books.Update(book);
                     await _context.SaveChangesAsync();
                     //ViewBag.Massage = "Книга успешно добавлена";
                     return RedirectToAction("Info", "Home", book.Id);

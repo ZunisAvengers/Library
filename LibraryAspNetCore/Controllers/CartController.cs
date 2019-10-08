@@ -53,7 +53,7 @@ namespace LibraryAspNetCore.Controllers
             return RedirectToAction("Index");
         }
         
-        public async void AddCart(Guid id)
+        public async Task<IActionResult> AddCart(Guid id)
         {
             BookInLibrary book = await _context.BooksInLibraries.FirstOrDefaultAsync(bl => bl.Id == id);
             if (book != null && book.CurrentQuantity > 0)
@@ -61,6 +61,7 @@ namespace LibraryAspNetCore.Controllers
                 _cart.AddCart(book);
             }
             ViewBag.Massage = "Данной книги нет в наличии";
+            return RedirectToAction("Index", "Home");
         }
         
         public void RemoveCart(Guid id)

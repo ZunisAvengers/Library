@@ -8,12 +8,12 @@ namespace LibraryAspNetCore.ViewModels
 {
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Не указано Имя")]
+        [Required(ErrorMessage = "Не указан Логин")]
         public string Login { get; set; }
         [Required(ErrorMessage = "Не указан Email")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Не указан номер телефона")]
-        [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$")]
+        //[RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$")]
         public string Phone { get; set; }
         [Required(ErrorMessage = "Не указано Имя")]
         public string FirstName { get; set; }

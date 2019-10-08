@@ -2,17 +2,17 @@
 @{
     ViewData["Title"] = "View";
 }
-<h3>Войти</h3>
+<h3>Регистрация</h3>
 <form asp-action="Register" asp-controller="Account" method="post">
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <table>
-        <tr><td><label asp-for="Login">Введите ваш логин</label></td><td><input type="text" asp-for="Login" /></td><td><span asp-validation-for="Login" /></td></tr>
-        <tr><td><label asp-for="FirstName">Введите ваше Имя</label></td><td><input type="text" asp-for="FirstName" /></td><td><span asp-validation-for="FirstName" /></td></tr>
-        <tr><td><label asp-for="LastName">Введите вашу Фамилию</label></td><td><input type="text" asp-for="LastName" /></td><td><span asp-validation-for="LastName" /></td></tr>
-        <tr><td><label asp-for="Email">Введите ваш Email</label></td><td><input type="text" asp-for="Phone" /></td><td><span asp-validation-for="Phone" /></td></tr>
-        <tr><td><label asp-for="Phone">Введите ваш номер телефона</label></td><td><input type="text" asp-for="Email" /></td><td><span asp-validation-for="Email" /></td></tr>
-        <tr><td><label asp-for="Password">Введите ваш пароль</label></td><td><input type="text" asp-for="Password" /></td><td><span asp-validation-for="Password" /></td></tr>
-        <tr><td><label asp-for="ConfirmPassword">Введите ваш пароль ещё раз</label></td><td><input type="text" asp-for="ConfirmPassword" /></td><td><span asp-validation-for="ConfirmPassword" /></td></tr>
+        <tr><td><label asp-for="Login">Введите ваш логин</label></td><td><input type="text" asp-for="Login" /></td><td><span asp-validation-for="Login" class="text-danger"></span></td></tr>
+        <tr><td><label asp-for="FirstName">Введите ваше Имя</label></td><td><input type="text" asp-for="FirstName" /></td><td><span asp-validation-for="FirstName" class="text-danger"></span></td></tr>
+        <tr><td><label asp-for="LastName">Введите вашу Фамилию</label></td><td><input type="text" asp-for="LastName" /></td><td><span asp-validation-for="LastName" class="text-danger"></span></td></tr>
+        <tr><td><label asp-for="Email">Введите ваш Email</label></td><td><input type="text" asp-for="Phone" /></td><td><span asp-validation-for="Phone" class="text-danger"></span></td></tr>
+        <tr><td><label asp-for="Phone">Введите ваш номер телефона</label></td><td><input type="text" asp-for="Email" /></td><td><span asp-validation-for="Email" class="text-danger"></span></td></tr>
+        <tr><td><label asp-for="Password">Введите ваш пароль</label></td><td><input type="text" asp-for="Password" /></td><td><span asp-validation-for="Password" class="text-danger"></span></td></tr>
+        <tr><td><label asp-for="ConfirmPassword">Введите ваш пароль ещё раз</label></td><td><input type="text" asp-for="ConfirmPassword" /></td><td><span asp-validation-for="ConfirmPassword" class="text-danger"></span></td></tr>
     </table>
     <input type="submit" value="Зарегистрироваться" />
 </form>

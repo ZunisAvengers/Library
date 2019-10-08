@@ -52,8 +52,17 @@ namespace LibraryAspNetCore.Controllers
                     .FirstOrDefaultAsync(b => b.Id == id);
             if (book != null)
             {
-                List<BookInLibrary> bookInLibraries = await _context.BooksInLibraries.Include(bl => bl.Library).Where(bl => bl.Book == book).ToListAsync();
-                return View(new InfoBookViewModel(book, bookInLibraries));
+                List<BookInLibrary> books = await _context.BooksInLibraries.Include(bl => bl.Library).Where(bl => bl.Book == book).ToListAsync();
+                List<InfoBookInLibraryViewModel> infoBooks = new List<InfoBookInLibraryViewModel>();
+                foreach (var item in books)
+                    infoBooks.Add(new InfoBookInLibraryViewModel
+                    {
+                        Library = await _context.Libraries.Include(l => l.BookInLibrares).FirstOrDefaultAsync(l => l.Id == item.Library.Id),
+                        TotalQuantity = item.TotalQuantity,
+                        CurrentQuantity = item.CurrentQuantity
+                    });
+                return View(new InfoBookViewModel { Book = book, Libraries = infoBooks});
+                
             }
             return RedirectToAction("Index");
         }
