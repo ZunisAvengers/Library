@@ -157,7 +157,7 @@ using LibraryAspNetCore.ViewModels;
             WriteLiteral("                </ul>\r\n            </td>\r\n            <td>\r\n                ");
             EndContext();
             BeginContext(1208, 120, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fbf4e9f7d9b74cf6b44ab6f85694a8de", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a12abdff3776407a9827a355ada44283", async() => {
                 BeginContext(1280, 44, true);
                 WriteLiteral("<div class=\"btn btn-default\">Подробнее</div>");
                 EndContext();
@@ -211,7 +211,7 @@ using LibraryAspNetCore.ViewModels;
             WriteLiteral("    ");
             EndContext();
             BeginContext(1420, 102, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "04b1ca74ab554d1ba66804c4f4c3cdb4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8f6ae0d126245dd9ad52b3634e926a8", async() => {
                 BeginContext(1469, 49, true);
                 WriteLiteral("<div class=\"btn btn-success\">Добавить книгу</div>");
                 EndContext();

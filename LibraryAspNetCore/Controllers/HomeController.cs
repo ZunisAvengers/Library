@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using LibraryAspNetCore.Models;
 using Microsoft.EntityFrameworkCore;
 using LibraryAspNetCore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryAspNetCore.Controllers
 {
-
+    [Authorize(Roles = "Admin, Moder")]
     public class HomeController : Controller
     {
         private readonly ApplicationContext _context;

@@ -44,6 +44,22 @@
                         <li><a asp-controller="Account" asp-action="Register">Регистрация</a></li>
                     </ul>
                 }
+                <div style="float:right;">
+                    @if (User.Identity.IsAuthenticated && !User.IsInRole("User"))
+                    {
+                        <ul class="nav navbar-nav" style="">
+                            <li><a asp-controller="Create" asp-action="Index">Create</a></li>
+                            <li><a asp-controller="Cart" asp-action="Index">Cart</a></li>
+                            <li><a asp-controller="Library" asp-action="Index">Library</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav" style="">
+                            <li><a asp-controller="Cart" asp-action="Index">Cart</a></li>
+                        </ul>
+                    }
+                </div>
             </div>
         </div>
     </nav>

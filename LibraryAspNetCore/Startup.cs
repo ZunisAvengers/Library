@@ -42,7 +42,7 @@ namespace LibraryAspNetCore
                     options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
-            services.AddScoped(sp => Cart.GetCart(sp));
+            //services.AddScoped(sp => Cart.GetCart(sp));
             services.AddMvc(options =>
             {
                 options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
@@ -78,7 +78,7 @@ namespace LibraryAspNetCore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}", new { controller = "Orders", action = "Index" //, id = "68ccdacd-6a61-4b4a-94f1-447415287f11" 
+                    template: "{controller}/{action}/{id?}", new { controller = "Home", action = "Index" //, id = "aaa67fcf-15f6-48c1-9f14-f4382fc61810"
                     });
             });
 

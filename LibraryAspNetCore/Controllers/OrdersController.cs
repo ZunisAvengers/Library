@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using LibraryAspNetCore.Models;
 using Microsoft.EntityFrameworkCore;
 using LibraryAspNetCore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryAspNetCore.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly ApplicationContext _context;

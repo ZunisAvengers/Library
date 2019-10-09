@@ -30,7 +30,7 @@ namespace LibraryAspNetCore.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public async Task<IActionResult> AddBooks(Guid id)
+        public async Task<IActionResult> AddBookInLibrary(Guid id)
         {
             Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == id);
             if (library != null)
@@ -45,8 +45,11 @@ namespace LibraryAspNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                BookInLibrary book = await _context.BooksInLibraries.FirstOrDefaultAsync(b => b.Book.Id == model.BookId && b.Library.Id == model.LibraryId);
-                if (book != null)
+                BookInLibrary book = await _context.BooksInLibraries
+                    .Include(b => b.Library)
+                    .Include(b => b.Book)
+                    .FirstOrDefaultAsync(b => b.Book.Id == model.BookId && b.Library.Id == model.LibraryId);
+                if (book == null)
                 {
                     Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == model.LibraryId);
                     _context.BooksInLibraries.Add(new BookInLibrary

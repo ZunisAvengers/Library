@@ -3,70 +3,113 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LibraryAspNetCore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryAspNetCore.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ApplicationContext _context;
-        private readonly Cart _cart;
-        public CartController(ApplicationContext context, Cart cart)
+        public CartController(ApplicationContext context)
         {
-            _cart = cart;
             _context = context;
         }
         public async Task<IActionResult> Index()
         {
-            //ViewBag.Library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == _cart.LibraryId);
-            //List<BookInLibrary> books = new List<BookInLibrary>();
-            //List<BookCart> carts = await _cart.GetBooks();
-            //foreach (var book in carts) books.Add(await _context.BooksInLibraries.FirstOrDefaultAsync(b => b == book.Book));
-            _cart.BookCarts = await _cart.GetBooks();
-            return View(_cart);
-        }       
-        
-        public async Task<IActionResult> Order(DateTime date)
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
+            List<Cart> list = await _context.Carts
+                .Include(c => c.User)
+                .Include(c => c.BookInLibrary)
+                    .ThenInclude(bl => bl.Library)
+                .Include(c => c.BookInLibrary)
+                    .ThenInclude(bl => bl.Book)
+                        .ThenInclude(bb => bb.Author)
+                .Where(c => c.User == user)
+                .ToListAsync();
+            ViewBag.Library = list.Any() ? list[0].BookInLibrary.Library.Name : "";
+            return View(list);
+        }        
+        [HttpPost]
+        public async Task<IActionResult> Index(DateTime date)
         {
-            if (ModelState.IsValid)
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
+            List<Cart> carts = await _context.Carts
+                .Include(c => c.User)
+                .Include(c => c.BookInLibrary)
+                    .ThenInclude(bl => bl.Library)
+                .Where(c => c.User == user)
+                .ToListAsync();
+            if (carts != null && carts.Count > 0)
             {
-                Order order = new Order();
-                order.DateGet = date;
-                order.DateOrder = DateTime.Now;
-                order.User = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
-                //order.Library= await _context.Libraries.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
-                _cart.BookCarts = await _cart.GetBooks();
-                foreach (var item in _cart.BookCarts)
+                Order order = new Order
+                {
+                    DateGet = date,
+                    DateOrder = DateTime.Today,
+                    User = user,
+                    Library = carts[0].BookInLibrary.Library
+                };
+                foreach (var item in carts)
                 {
                     _context.OrderDetailses.Add(new OrderDetailse
                     {
-                        Book = item.Book,
+                        Book = item.BookInLibrary,
                         Order = order
                     });
-                    _cart.RemoveCart(item.Id);
+                    _context.Carts.Remove(await _context.Carts.FirstOrDefaultAsync(c => c == item));
                 }
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Info", "Orders", order.Id);
             }
-            return RedirectToAction("Index");
+            return View(date);
         }
-        
-        public async Task<IActionResult> AddCart(Guid id)
+        public async Task<IActionResult> AddBookInCart(Guid id)
         {
-            BookInLibrary book = await _context.BooksInLibraries.FirstOrDefaultAsync(bl => bl.Id == id);
-            if (book != null && book.CurrentQuantity > 0)
+            BookInLibrary bookInLibrary = await _context.BooksInLibraries
+                .Include(bl => bl.Library)
+                .FirstOrDefaultAsync(b => b.Id == id);
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
+            List <Cart> carts = await _context.Carts
+                .Include(c => c.User)
+                .Include(c => c.BookInLibrary)
+                    .ThenInclude(bl => bl.Library)
+                .Where(c => c.User == user)
+                .ToListAsync();
+            if (bookInLibrary != null && user != null && bookInLibrary.CurrentQuantity > 0)
             {
-                _cart.AddCart(book);
+                if (carts == null || carts.Count == 0 || carts[0].BookInLibrary.Library == bookInLibrary.Library)
+                {
+                    _context.Carts.Add(new Cart
+                    {
+                        User = user,
+                        BookInLibrary = bookInLibrary
+                    });
+                    bookInLibrary.CurrentQuantity--;
+                    _context.BooksInLibraries.Update(bookInLibrary);
+                    await _context.SaveChangesAsync();
+                }
             }
-            ViewBag.Massage = "Данной книги нет в наличии";
             return RedirectToAction("Index", "Home");
         }
-        
-        public void RemoveCart(Guid id)
+        public async Task<IActionResult> RemoveBookInCart(Guid id)
         {
-            _cart.RemoveCart(id);
+            Cart bookInCart = await _context.Carts
+                .Include(c => c.User)
+                .Include(c => c.BookInLibrary)
+                .FirstOrDefaultAsync(c => c.Id == id);
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
+            if (bookInCart != null && user != null && bookInCart.User == user)
+            {
+                BookInLibrary bookInLibrary = await _context.BooksInLibraries.FirstOrDefaultAsync(b => b == bookInCart.BookInLibrary);
+                bookInLibrary.CurrentQuantity++;
+                _context.BooksInLibraries.Update(bookInLibrary);
+                _context.Carts.Remove(bookInCart);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

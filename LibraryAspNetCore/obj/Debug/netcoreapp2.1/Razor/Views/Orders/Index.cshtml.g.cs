@@ -121,7 +121,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("    </td>\r\n    <td>\r\n    <td>\r\n        ");
             EndContext();
             BeginContext(672, 117, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "685ad16f433c4942b84e5d5e0b364ab4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f1e9140df04f4544a029b44609fb687c", async() => {
                 BeginContext(741, 44, true);
                 WriteLiteral("<div class=\"btn btn-default\">Подробнее</div>");
                 EndContext();

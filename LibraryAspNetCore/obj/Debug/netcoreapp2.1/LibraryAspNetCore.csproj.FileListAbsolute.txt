@@ -34,7 +34,6 @@ C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netco
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Observer\Info.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.cshtml.g.cs
-C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Cart\Index.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\Index.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\AddBook.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\AddLibrary.cshtml.g.cs
@@ -43,3 +42,4 @@ C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netco
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Library\Info.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Library\AddBookInLibrary.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Orders\Index.cshtml.g.cs
+C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Cart\Index.cshtml.g.cs

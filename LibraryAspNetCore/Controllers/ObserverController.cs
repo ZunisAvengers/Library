@@ -24,7 +24,7 @@ namespace LibraryAspNetCore.Controllers
         public async Task<IActionResult> Info(Guid id)
         {
             Order order = await _context.Orders
-                //.Include(o => o.Library)
+                .Include(o => o.Library)
                 .Include(o => o.User)
                 .Include(o => o.OrderDetailse)
                     .ThenInclude(od => od.Book)
@@ -39,7 +39,9 @@ namespace LibraryAspNetCore.Controllers
         [HttpPost]
         public async Task<IActionResult> Close(Guid id)
         {
-            Order order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            Order order = await _context.Orders
+                .Include(o => o.OrderDetailse)
+                .FirstOrDefaultAsync(o => o.Id == id);
             if (order != null)
             {
                 if (order.DeliveredInLibrary) ViewBag.Message = "Заказ уже закрыт";
