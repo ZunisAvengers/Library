@@ -29,6 +29,9 @@ namespace LibraryAspNetCore.Controllers
                 .Include(o => o.OrderDetailse)
                     .ThenInclude(od => od.Book)
                         .ThenInclude(bl => bl.Book)
+                .Include(o => o.OrderDetailse)
+                    .ThenInclude(od => od.Book)
+                        .ThenInclude(bl => bl.Library)
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (order != null) 
             {

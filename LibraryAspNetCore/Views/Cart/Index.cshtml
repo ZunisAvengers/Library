@@ -5,7 +5,7 @@
     <form asp-action="Index" asp-controller="Cart" method="post">
         <h3>Выберете когда вы заберёте книги:</h3>
         <input type="datetime-local" />
-        <input value="Заказать" class="btn btn-default" type="submit" />
+        <input value="Заказать" name="date" asp-fragment="date" class="btn btn-default" type="submit" />
     </form>
     <table class="table">
         <tr>
