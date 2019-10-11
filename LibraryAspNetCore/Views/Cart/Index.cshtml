@@ -4,8 +4,9 @@
     <h3>Ваша корзина в @ViewBag.Library</h3>
     <form asp-action="Index" asp-controller="Cart" method="post">
         <h3>Выберете когда вы заберёте книги:</h3>
-        <input type="datetime-local" />
-        <input value="Заказать" name="date" asp-fragment="date" class="btn btn-default" type="submit" />
+        <input type="date" name="date" id="date" />
+        <input value="Заказать" name="date" id="date" class="btn btn-default" type="submit" />
+        <span class="text-danger">@ViewBag.Error</span>
     </form>
     <table class="table">
         <tr>

@@ -1,0 +1,65 @@
+﻿@model LibraryAspNetCore.ViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h2>Info</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Дата заказа:
+        </dt>
+        <dd>
+            @Model.Order.DateOrder.ToString("D")
+        </dd>
+        <dt>
+            Дата Выдачи заказа:
+        </dt>
+        <dd>
+            @Model.Order.DateGet.ToString("D")
+        </dd>
+        <dt>
+            Библиотека:
+        </dt>
+        <dd>
+            @Model.Order.Library.Name
+        </dd>
+        <dt>
+            Статус:
+        </dt>
+        <dd>
+            @if (!Model.Order.IsGet)
+            {
+                <p>Вы не забрали книги</p>
+            }
+            else if (!Model.Order.DeliveredInLibrary)
+            {
+                <p>Вы не вернули книги. Верните их до @Model.Order.DateOrder.AddDays(7).ToString("D")</p>
+            }
+            else if (Model.Order.Notflicetion)
+            {
+                <p>Вы должник</p>
+            }
+            else
+            {
+                <p>Заказ закрыт</p>
+            }
+        </dd>
+    </dl>
+    <h4>Список книг</h4>
+    <ul>
+        @foreach (var item in Model.Books)
+        {
+            <li>
+                <a asp-action="Info" asp-controller="Home" asp-route="@item.Id">@item.Name (@item.Author.Name)</a>
+            </li>
+        }
+    </ul>
+</div>
+<div>
+    <div class="btn btn-default"><a asp-action="Index">Назад к списку</a></div>
+</div>

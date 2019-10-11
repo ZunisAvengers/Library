@@ -1,43 +1,75 @@
-﻿@model LibraryAspNetCore.Models.Order
+﻿@model LibraryAspNetCore.ViewModels.OrderViewModel
 
 @{
     ViewData["Title"] = "Info";
 }
 
-<h2>Info</h2>
+<h2>Информация о заказе</h2>
 
 <div>
     <h4>Order</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.DateOrder)
+            Дата заказа
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DateOrder)
+            @Html.DisplayFor(model => Model.Order.DateOrder.ToString("D"))
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DateGet)
+            Дата Выдачи заказа
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DateGet)
+            @Html.DisplayFor(model => Model.Order.DateGet.ToString("D"))
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IsGet)
+            Библиотека:
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IsGet)
+            <a asp-action="Indo" asp-controller="Library" asp-route="@Model.Order.Library.Id">@Model.Order.Library.Name</a>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DeliveredInLibrary)
+            Статус:
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DeliveredInLibrary)
+            @if (!Model.Order.IsGet)
+            {
+                <p>Заказ не был выдан</p>
+            }
+            else if (!Model.Order.DeliveredInLibrary)
+            {
+                <p>Заказ должен быть вернут до @Model.Order.DateOrder.AddDays(7).ToString("D")</p>
+            }
+            else if (Model.Order.Notflicetion)
+            {
+                <p>Должник</p>
+            }
+            else
+            {
+                <p>Заказ закрыт</p>
+            }
         </dd>
     </dl>
+    <h4>Список книг</h4>
+    <ul>
+        @foreach(var item in Model.Books)
+        {
+            <li>
+                <a asp-action="Info" asp-controller="Home" asp-route="@item.Id">@item.Name (@item.Author.Name)</a>
+            </li>
+        }
+    </ul>
 </div>
 <div>
-    <div class="btn btn-default"><a asp-action="Index">Back to List</a></div>
-    <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@Model.Id">Set Book</a></div>
-    <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@Model.Id">Close Order</a></div>
+
+    @if (!Model.Order.DeliveredInLibrary)
+    {
+        <div class="btn btn-default"><a asp-action="SetBook" asp-controller="Observer" asp-route-id="@Model.Order.Id">Set Book</a></div>
+        <div class="btn btn-default"><a asp-action="Close" asp-controller="Observer" asp-route-id="@Model.Order.Id">Close Order</a></div>
+        <div class="btn btn-default"><a asp-action="Index">Back to List</a></div>
+    }
+    else
+    {
+        <div class="btn btn-default"><a asp-action="Story">Back to List</a></div>
+    }
 </div>

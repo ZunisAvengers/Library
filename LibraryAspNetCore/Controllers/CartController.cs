@@ -29,6 +29,7 @@ namespace LibraryAspNetCore.Controllers
                         .ThenInclude(bb => bb.Author)
                 .Where(c => c.User == user)
                 .ToListAsync();
+            ViewBag.Error = "";
             ViewBag.Library = list.Any() ? list[0].BookInLibrary.Library.Name : "";
             return View(list);
         }        
@@ -36,35 +37,50 @@ namespace LibraryAspNetCore.Controllers
         public async Task<IActionResult> Index(DateTime date)
         {
             User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
-            List<Cart> carts = await _context.Carts
+            if (date >= DateTime.Today)
+            {
+                List<Cart> carts = await _context.Carts
+                    .Include(c => c.User)
+                    .Include(c => c.BookInLibrary)
+                        .ThenInclude(bl => bl.Library)
+                    .Where(c => c.User == user)
+                    .ToListAsync();
+                if (carts != null && carts.Count > 0)
+                {
+                    Order order = new Order
+                    {
+                        DateGet = date,
+                        DateOrder = DateTime.Today,
+                        User = user,
+                        Library = carts[0].BookInLibrary.Library
+                    };
+                    foreach (var item in carts)
+                    {
+                        _context.OrderDetailses.Add(new OrderDetailse
+                        {
+                            Book = item.BookInLibrary,
+                            Order = order
+                        });
+                        _context.Carts.Remove(await _context.Carts.FirstOrDefaultAsync(c => c == item));
+                    }
+                    _context.Orders.Add(order);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Error = "";
+                    return RedirectToAction("Info", "Orders", order.Id);
+                }
+            }
+            ViewBag.Error = "Дата выдачи заказа должна быть не позже сегоднешнего дня";
+            List<Cart> list = await _context.Carts
                 .Include(c => c.User)
                 .Include(c => c.BookInLibrary)
                     .ThenInclude(bl => bl.Library)
+                .Include(c => c.BookInLibrary)
+                    .ThenInclude(bl => bl.Book)
+                        .ThenInclude(bb => bb.Author)
                 .Where(c => c.User == user)
                 .ToListAsync();
-            if (carts != null && carts.Count > 0)
-            {
-                Order order = new Order
-                {
-                    DateGet = date,
-                    DateOrder = DateTime.Today,
-                    User = user,
-                    Library = carts[0].BookInLibrary.Library
-                };
-                foreach (var item in carts)
-                {
-                    _context.OrderDetailses.Add(new OrderDetailse
-                    {
-                        Book = item.BookInLibrary,
-                        Order = order
-                    });
-                    _context.Carts.Remove(await _context.Carts.FirstOrDefaultAsync(c => c == item));
-                }
-                _context.Orders.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Info", "Orders", order.Id);
-            }
-            return View(date);
+            ViewBag.Library = list.Any() ? list[0].BookInLibrary.Library.Name : "";
+            return View(list);
         }
         public async Task<IActionResult> AddBookInCart(Guid id)
         {

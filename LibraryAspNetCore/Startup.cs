@@ -78,7 +78,7 @@ namespace LibraryAspNetCore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}", new { controller = "Home", action = "Index" //, id = "aaa67fcf-15f6-48c1-9f14-f4382fc61810"
+                    template: "{controller}/{action}/{id?}", new { controller = "Observer", action = "Index" //, id = "aaa67fcf-15f6-48c1-9f14-f4382fc61810"
                     });
             });
 

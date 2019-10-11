@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LibraryAspNetCore.Models;
+using LibraryAspNetCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,17 @@ namespace LibraryAspNetCore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+            return View(await _context.Orders
+                .Include(o => o.User)
+                .Where(o => o.DeliveredInLibrary == false)
+                .ToListAsync());
+        }
+        public async Task<IActionResult> Story()
+        {
+            return View(await _context.Orders
+                .Include(o => o.User)
+                .Where(o => o.DeliveredInLibrary == true)
+                .ToListAsync());
         }
         public async Task<IActionResult> Info(Guid id)
         {
@@ -29,33 +40,43 @@ namespace LibraryAspNetCore.Controllers
                 .Include(o => o.OrderDetailse)
                     .ThenInclude(od => od.Book)
                         .ThenInclude(bl => bl.Book)
-                .Include(o => o.OrderDetailse)
-                    .ThenInclude(od => od.Book)
-                        .ThenInclude(bl => bl.Library)
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (order != null) 
             {
-                return View(order);
+                List<OrderDetailse> orderDetailses = await _context.OrderDetailses.Where(o => o.Order == order).ToListAsync();
+                List<Book> books = new List<Book>();
+                foreach(var od in orderDetailses)
+                {
+                    books.Add(await _context.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b == od.Book.Book));
+                }
+                return View(new OrderViewModel {Books = books, Order = order });
             }
             return RedirectToAction("Index");
         }
-        [HttpPost]
+        
         public async Task<IActionResult> Close(Guid id)
         {
             Order order = await _context.Orders
                 .Include(o => o.OrderDetailse)
                 .FirstOrDefaultAsync(o => o.Id == id);
-            if (order != null)
+            if (order.DeliveredInLibrary) ViewBag.Message = "Заказ уже закрыт";
+            else if (order != null)
             {
-                if (order.DeliveredInLibrary) ViewBag.Message = "Заказ уже закрыт";
                 order.DeliveredInLibrary = true;
+                if(!order.IsGet) order.IsGet = true;
                 _context.Orders.Update(order);
+                List<OrderDetailse> orderDetailse = await _context.OrderDetailses.Include(od => od.Book).Where(od => od.Order == order).ToListAsync();
+                foreach(var item in orderDetailse)
+                {
+                    item.Book.CurrentQuantity++;
+                    _context.BooksInLibraries.Update(item.Book);
+                }
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Info", "Home", id);
+                return RedirectToAction("Info", id);
             }
             return RedirectToAction("Index");
         }
-        [HttpPost]
+        
         public async Task<IActionResult> SetBook(Guid id)
         {
             Order order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
@@ -65,7 +86,7 @@ namespace LibraryAspNetCore.Controllers
                 order.IsGet = true;
                 _context.Orders.Update(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Info", "Home", id);
+                return RedirectToAction("Info", id);
             }
             return RedirectToAction("Index");
         }

@@ -23,7 +23,13 @@ namespace LibraryAspNetCore.Controllers
             View(await _context.Orders
                 .Include(o => o.User)
                 .Include(o => o.OrderDetailse)
-                .Where(o => o.User.Login == User.Identity.Name)
+                .Where(o => o.User.Login == User.Identity.Name && o.DeliveredInLibrary == false)
+                .ToListAsync());
+        public async Task<IActionResult> Story() => 
+            View(await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderDetailse)
+                .Where(o => o.User.Login == User.Identity.Name && o.DeliveredInLibrary == true)
                 .ToListAsync());
         public async Task<IActionResult> Info(Guid id)
         {
@@ -32,8 +38,9 @@ namespace LibraryAspNetCore.Controllers
                 .Include(o => o.OrderDetailse)
                 .Where(o => o.User.Login == User.Identity.Name)
                 .FirstOrDefaultAsync(o => o.Id == id);
-            if (order != null && order.User.Login == User.Identity.Name) View(order);
+            if (order != null && order.User.Login == User.Identity.Name) return View(order);
             return RedirectToAction("Index");
         }
+        
     }
 }

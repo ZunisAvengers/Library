@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LibraryAspNetCore.Models.Order>
+
+@{
+    ViewData["Title"] = "Story";
+}
+
+<h2>История заказов</h2>
+<a asp-action="Index">Назад к списку</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Имя заказчика
+            </th>
+            <th>
+                Дата заказа
+            </th>
+            <th>
+                Дата Выдачи заказа
+            </th>
+            <th>
+                Статус
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.User.FirstName @item.User.LastName
+                </td>
+                <td>
+                    @item.DateOrder.ToString("D")
+                </td>
+                <td>
+                    @item.DateGet.ToString("D")
+                </td>
+                <td>
+                    <p>Заказ закрыт</p>
+                </td>
+                <td>
+                    <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@item.Id">Подробнее</a></div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
