@@ -1,0 +1,24 @@
+﻿@model IEnumerable<LibraryAspNetCore.Models.PublishingHouse>
+@{
+}
+<div>
+<div style="float:right">
+    <h3 style="margin-left:40%">Все Издательства</h3>
+    <table class="table">
+        <tr><td width="400">Название</td><td></td></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td><a asp-action="EditPublishingHouse" asp-controller="Create" asp-route-id="@item.Id"><div class="btn btn-success">Изменить</div></a></td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+    <form asp-action="Author" asp-controller="Create" method="post">
+        <label class="Name">Введите название Издательства</label><br />
+        <input type="text" class="Name" name="Name" /><br /><br />
+        <input type="submit" value="Добваить категорию" class="btn btn-default" /><br />
+    </form>
+</div>

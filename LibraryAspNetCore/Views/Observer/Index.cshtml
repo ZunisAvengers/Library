@@ -3,64 +3,72 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Список действующих заказов</h2>
-<a asp-action="Story">История заказов</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Имя заказчика
-            </th>
-            <th>
-                Дата заказа
-            </th>
-            <th>
-                Дата Выдачи заказа
-            </th>
-            <th>
-                Статус
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @item.User.FirstName @item.User.LastName
-            </td>
-            <td>
-                @item.DateOrder.ToString("D")
-            </td>
-            <td>
-                @item.DateGet.ToString("D")
-            </td>
-            <td>
-                @if (!item.IsGet)
-                {
-                    <p>Заказ не был выдан</p>
-                }
-                else if (!item.DeliveredInLibrary)
-                {
-                    <p>Заказ должен быть вернут до @item.DateOrder.AddDays(7).ToString("D")</p>
-                }
-                else if (item.Notflicetion)
-                {
-                    <p>Должник</p>
-                }
-                else
-                {
-                    <p>Заказ закрыт</p>
-                }
-            </td>
-            <td>
-                <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@item.Id">Details</a></div>
-                <div class="btn btn-default"><a asp-action="SetBook" asp-controller="Observer" asp-route-id="@item.Id">Set Book</a></div>
-                <div class="btn btn-default"><a asp-action="Close" asp-controller="Observer" asp-route-id="@item.Id">Close Order</a></div>
-            </td>
-        </tr>
+@if (Model.Any())
+{
+    <h2>Список действующих заказов</h2>
+    <a asp-action="Story">История заказов</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Имя заказчика
+                </th>
+                <th>
+                    Дата заказа
+                </th>
+                <th>
+                    Дата Выдачи заказа
+                </th>
+                <th>
+                    Статус
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.User.FirstName @item.User.LastName
+                    </td>
+                    <td>
+                        @item.DateOrder.ToString("D")
+                    </td>
+                    <td>
+                        @item.DateGet.ToString("D")
+                    </td>
+                    <td>
+                        @if (!item.IsGet)
+                        {
+                            <p>Заказ не был выдан</p>
+                        }
+                        else if (!item.DeliveredInLibrary)
+                        {
+                            <p>Заказ должен быть вернут до @item.DateOrder.AddDays(7).ToString("D")</p>
+                        }
+                        else if (item.Notflicetion)
+                        {
+                            <p>Должник</p>
+                        }
+                        else
+                        {
+                            <p>Заказ закрыт</p>
+                        }
+                    </td>
+                    <td>
+                        <div class="btn btn-default"><a asp-action="Info" asp-controller="Observer" asp-route-id="@item.Id">Details</a></div>
+                        <div class="btn btn-default"><a asp-action="SetBook" asp-controller="Observer" asp-route-id="@item.Id">Set Book</a></div>
+                        <div class="btn btn-default"><a asp-action="Close" asp-controller="Observer" asp-route-id="@item.Id">Close Order</a></div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+else
+{
+    <h2>Сейчас нет действующих заказов</h2>
+    <h4><a asp-action="Story">История заказов</a></h4>
+}

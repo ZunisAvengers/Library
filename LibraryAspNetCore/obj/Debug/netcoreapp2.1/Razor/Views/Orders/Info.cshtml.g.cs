@@ -161,7 +161,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("            <li>\r\n                ");
             EndContext();
             BeginContext(1296, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9463d09c3b8247ecb397761a72e1c009", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a5cfb27edb894bc3baa27fd4d35bc11f", async() => {
                 BeginContext(1361, 9, false);
 #line 58 "C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\Views\Orders\Info.cshtml"
                                                                            Write(item.Name);
@@ -219,7 +219,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("    </ul>\r\n</div>\r\n<div>\r\n    <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1485, 40, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cce7e3c353414b0283b22162e2827f71", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e120482284d64731b2521b21a74f1dea", async() => {
                 BeginContext(1507, 14, true);
                 WriteLiteral("Назад к списку");
                 EndContext();

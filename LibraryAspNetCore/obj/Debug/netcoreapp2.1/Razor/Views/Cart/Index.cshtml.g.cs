@@ -75,7 +75,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</h3>\r\n    ");
             EndContext();
             BeginContext(123, 332, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "326585b04f8d4e7ab81904d4ec350cf2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f77c6b6fe11448d954d0df1a9b34bbb", async() => {
                 BeginContext(184, 237, true);
                 WriteLiteral("\r\n        <h3>Выберете когда вы заберёте книги:</h3>\r\n        <input type=\"date\" name=\"date\" id=\"date\" />\r\n        <input value=\"Заказать\" name=\"date\" id=\"date\" class=\"btn btn-default\" type=\"submit\" />\r\n        <span class=\"text-danger\">");
                 EndContext();
@@ -142,7 +142,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral(")</td>\r\n                <td></td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(821, 124, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8bc3e0788144f7795f15c6e0ddfa937", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46c1f6af5dd24fee9e90a4dbac1f2f25", async() => {
                 BeginContext(900, 41, true);
                 WriteLiteral("<div class=\"btn btn-danger\">Удалить</div>");
                 EndContext();

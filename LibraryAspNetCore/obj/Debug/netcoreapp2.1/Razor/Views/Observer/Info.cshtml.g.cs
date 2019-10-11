@@ -91,7 +91,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n        </dd>\r\n        <dt>\r\n            Библиотека:\r\n        </dt>\r\n        <dd>\r\n            ");
             EndContext();
             BeginContext(602, 111, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dc280e645bda4b9cab8d334ee205efcb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18041834c1424d1ea1d9c046c79dcc5e", async() => {
                 BeginContext(685, 24, false);
 #line 29 "C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\Views\Observer\Info.cshtml"
                                                                                          Write(Model.Order.Library.Name);
@@ -194,7 +194,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("            <li>\r\n                ");
             EndContext();
             BeginContext(1435, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3ae01a430ae844708f7ccecb85835a17", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b3d157c577b34ed2b90536756c1762ca", async() => {
                 BeginContext(1500, 9, false);
 #line 58 "C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\Views\Observer\Info.cshtml"
                                                                            Write(item.Name);
@@ -261,7 +261,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("        <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1680, 93, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "02f8a179aec74b3188b302bd3638c43d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8693a57df94941c8b2cd6f83e1ca585c", async() => {
                 BeginContext(1761, 8, true);
                 WriteLiteral("Set Book");
                 EndContext();
@@ -298,7 +298,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</div>\r\n        <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1818, 94, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08b2dd5b010c4f378de1d06facdcd83c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5cb421c12e284403ba450b3e84c3f3c2", async() => {
                 BeginContext(1897, 11, true);
                 WriteLiteral("Close Order");
                 EndContext();
@@ -335,7 +335,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</div>\r\n        <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1957, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a8bab5b4920b4c87967f7e04c8511ab9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dc2a9329bb9a4086a8c970c07e41c9d9", async() => {
                 BeginContext(1979, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
@@ -367,7 +367,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("        <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(2064, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "58f4712d45614301b32388bc774d5523", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d919203800464a09842e4877afc6f5a2", async() => {
                 BeginContext(2086, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();

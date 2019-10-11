@@ -67,7 +67,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n<h2>Список действующих заказов</h2>\r\n");
             EndContext();
             BeginContext(134, 41, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "912e90cd71f24cbda4a27dfe1b8835ed", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "84abec201076413aa62d53d2b61e09ac", async() => {
                 BeginContext(156, 15, true);
                 WriteLiteral("История заказов");
                 EndContext();
@@ -215,7 +215,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("            </td>\r\n            <td>\r\n                <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1508, 82, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "40f68bf2fadb40f59282661aa6106d41", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "29d6469c0f344e0eb74aa2f73a793ad7", async() => {
                 BeginContext(1579, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -252,7 +252,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</div>\r\n                <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1643, 86, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14da1efc366b47cc9d7451412e10388b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bb9c060a8d7547409758e0a53b6a24cd", async() => {
                 BeginContext(1717, 8, true);
                 WriteLiteral("Set Book");
                 EndContext();
@@ -289,7 +289,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</div>\r\n                <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1782, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "afcde52cf4da4078a2b251a65d5dbda4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fb5dbcf949964b939b2391edf365c509", async() => {
                 BeginContext(1854, 11, true);
                 WriteLiteral("Close Order");
                 EndContext();

@@ -65,7 +65,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n<h2>История заказов</h2>\r\n");
             EndContext();
             BeginContext(123, 40, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "99736bef6b654d0da1f6f5a8666809cc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "195ace3c36ee485491c4c8c871b3f11c", async() => {
                 BeginContext(145, 14, true);
                 WriteLiteral("Назад к списку");
                 EndContext();
@@ -157,7 +157,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    <p>Заказ закрыт</p>\r\n                </td>\r\n                <td>\r\n                    <div class=\"btn btn-default\">");
             EndContext();
             BeginContext(1083, 84, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c1c1706c03d046ebb793bac7541a7098", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac307ce7a9644929b48babbc077b2749", async() => {
                 BeginContext(1154, 9, true);
                 WriteLiteral("Подробнее");
                 EndContext();

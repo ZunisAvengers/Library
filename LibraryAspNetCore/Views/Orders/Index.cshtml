@@ -1,42 +1,52 @@
 ﻿@model IEnumerable<LibraryAspNetCore.Models.Order>
-@{ 
+@{
     ViewData["Title"] = "";
 }
-<h2>Ваши заказы</h2>
-<table class="table">
-    <tr>
-        <td>Дата заказа</td>
-        <td>Список книг</td>
-        <td>Статус</td>
-        <td></td>
-    </tr>
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>@item.DateOrder</td>
-    <td>@item.OrderDetailse.Count</td>
-    <td>
-        @if (!item.IsGet)
+@if (Model.Any())
+{
+    <h2>Ваши заказы</h2>
+    <a asp-action="Story">История моих заказов</a>
+    <table class="table">
+        <tr>
+            <td>Дата заказа</td>
+            <td>Список книг</td>
+            <td>Статус</td>
+            <td></td>
+        </tr>
+        @foreach (var item in Model)
         {
-            <p>Вы не забрали книги</p>
+            <tr>
+                <td>@item.DateOrder</td>
+                <td>@item.OrderDetailse.Count</td>
+                <td>
+                    @if (!item.IsGet)
+                    {
+                        <p>Вы не забрали книги</p>
+                    }
+                    else if (!item.DeliveredInLibrary)
+                    {
+                        <p>Вы не вернули книги. Верните их до @item.DateOrder.AddDays(7).ToString("D")</p>
+                    }
+                    else if (item.Notflicetion)
+                    {
+                        <p>Вы должник</p>
+                    }
+                    else
+                    {
+                        <p>Заказ закрыт</p>
+                    }
+                </td>
+                <td>
+                <td>
+                    <a asp-controller="Orders" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a>
+                </td>
+                </td>
+            </tr>
         }
-        else if (!item.DeliveredInLibrary)
-        {
-            <p>Вы не вернули книги. Верните их до @item.DateOrder.AddDays(7).ToString("D")</p>
-        }
-        else if (item.Notflicetion)
-        {
-            <p>Вы должник</p>
-        }
-        else
-        {
-            <p>Заказ закрыт</p>
-        }
-    </td>
-    <td>
-    <td>
-        <a asp-controller="Orders" asp-action="Info" asp-route-id="@item.Id"><div class="btn btn-default">Подробнее</div></a></td>
-    </td>
-</tr>
-    }
-</table>
+    </table>
+}
+else
+{
+    <h2>Сейчас нет действующих заказов</h2>
+    <h4><a asp-action="Story">История заказов</a></h4>
+}

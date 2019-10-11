@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -124,18 +123,6 @@ namespace LibraryAspNetCore.Controllers
             ViewBag.PublishingHouses = new SelectList(await _context.PublishingHouses.ToListAsync(), "Id", "Name");
             return View(model);
         }
-        public async Task<IActionResult> DeleteBook(Guid id)
-        {
-            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
-            if (book != null)
-            {
-                foreach (var item in await _context.BooksInLibraries.Where(bl => bl.Book == book).ToListAsync())
-                    _context.BooksInLibraries.Remove(item);
-                _context.Books.Remove(book);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction("Index", "Home");
-        }
         [NonAction]
         public async Task<Author> AddAuthor(string authorName)
         {
@@ -178,7 +165,7 @@ namespace LibraryAspNetCore.Controllers
         {
             Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == id);
             if (library != null) return View(library);
-            ViewBag.Massage = "Такая библиотека не найдена ";
+            //ViewBag.Massage = "Такая библиотека не найдена ";
             return RedirectToAction("Index");
         }
         [HttpPost]
@@ -199,17 +186,117 @@ namespace LibraryAspNetCore.Controllers
                 }
             }
             return View(model);
-        }
-        
-        public async Task<IActionResult> DeleteLibrary(Guid id)
+        }        
+        [HttpGet]
+        public IActionResult Author()
         {
-            Library library = await _context.Libraries.FirstOrDefaultAsync(l => l.Id == id);
-            if (library != null)
+            return View(_context.Authors.OrderBy(n => n.Name).ToList());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Author(string name)
+        {
+            Author author= await _context.Authors.FirstOrDefaultAsync(c => c.Name == name);
+            if (author == null)
             {
-                _context.Libraries.Remove(library);
+                author = new Author { Name = name };
+                _context.Authors.Add(author);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "Library");
+            return View(_context.Authors.OrderBy(n => n.Name).ToList());
+        }
+        [HttpGet]
+        public async Task<IActionResult> EditAuthor(Guid id)
+        {
+            Author author = await _context.Authors.FirstOrDefaultAsync(c => c.Id == id);
+            if (author != null) return View(author);
+            return RedirectToAction("Author");
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAuthor(Author author)
+        {
+            Author _author = await _context.Authors.FirstOrDefaultAsync(c => c.Name == author.Name);
+            if (_author == null)
+            {
+                _context.Authors.Update(author);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Author");
+            }
+            ModelState.AddModelError("", "Такой автор уже существует");
+            return View(author);
+        }
+        [HttpGet]
+        public IActionResult Subject()
+        {
+            return View(_context.Subjects.OrderBy(n => n.Name).ToList());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Subject(string name)
+        {
+            Subject Subject = await _context.Subjects.FirstOrDefaultAsync(c => c.Name == name);
+            if (Subject == null)
+            {
+                Subject = new Subject { Name = name };
+                _context.Subjects.Add(Subject);
+                await _context.SaveChangesAsync();
+            }
+            return View(_context.Subjects.OrderBy(n => n.Name).ToList());
+        }
+        [HttpGet]
+        public async Task<IActionResult> EditSubject(Guid id)
+        {
+            Subject Subject = await _context.Subjects.FirstOrDefaultAsync(c => c.Id == id);
+            if (Subject != null) return View(Subject);
+            return RedirectToAction("Subject");
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditSubject(Subject Subject)
+        {
+            Subject _Subject = await _context.Subjects.FirstOrDefaultAsync(c => c.Name == Subject.Name);
+            if (_Subject == null)
+            {
+                _context.Subjects.Update(Subject);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Subject");
+            }
+            ModelState.AddModelError("", "Такой жанр уже существует");
+            return View(Subject);
+        }
+        [HttpGet]
+        public IActionResult PublihingHouse()
+        {
+            return View(_context.PublishingHouses.OrderBy(n => n.Name).ToList());
+        }
+        [HttpPost]
+        public async Task<IActionResult> PublihingHouse(string name)
+        {
+            PublishingHouse PublishingHouse= await _context.PublishingHouses.FirstOrDefaultAsync(c => c.Name == name);
+            if (PublishingHouse== null)
+            {
+                PublishingHouse= new PublishingHouse{ Name = name };
+                _context.PublishingHouses.Add(PublishingHouse);
+                await _context.SaveChangesAsync();
+            }
+            return View(_context.PublishingHouses.OrderBy(n => n.Name).ToList());
+        }
+        [HttpGet]
+        public async Task<IActionResult> EditPublihingHouse(Guid id)
+        {
+            PublishingHouse PublishingHouse= await _context.PublishingHouses.FirstOrDefaultAsync(c => c.Id == id);
+            if (PublishingHouse!= null) return View(PublishingHouse);
+            return RedirectToAction("PublihingHouse");
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditPublihingHouse(PublishingHouse PublishingHouse)
+        {
+            PublishingHouse _PublishingHouse = await _context.PublishingHouses.FirstOrDefaultAsync(c => c.Name == PublishingHouse.Name);
+            if (PublishingHouse == null)
+            {
+                _context.PublishingHouses.Update(PublishingHouse);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("PublihingHouse");
+            }
+            ModelState.AddModelError("", "Такое издательство уже существует");
+            return View(PublishingHouse);
         }
     }
 }
