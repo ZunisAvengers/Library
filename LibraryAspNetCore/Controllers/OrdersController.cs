@@ -38,7 +38,16 @@ namespace LibraryAspNetCore.Controllers
                 .Include(o => o.OrderDetailse)
                 .Where(o => o.User.Login == User.Identity.Name)
                 .FirstOrDefaultAsync(o => o.Id == id);
-            if (order != null && order.User.Login == User.Identity.Name) return View(order);
+            if (order != null && order.User.Login == User.Identity.Name) 
+            {
+                List<OrderDetailse> orderDetailses = await _context.OrderDetailses.Where(o => o.Order == order).ToListAsync();
+                List<Book> books = new List<Book>();
+                foreach (var od in orderDetailses)
+                {
+                    books.Add(await _context.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b == od.Book.Book));
+                }
+                return View(new OrderViewModel { Books = books, Order = order });
+            }
             return RedirectToAction("Index");
         }
         
