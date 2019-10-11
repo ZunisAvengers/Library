@@ -1,0 +1,14 @@
+﻿@model LibraryAspNetCore.Models.Author
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h3>Изменить @Model.Name</h3>
+<form>
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" value="@Model.Id" asp-for="Id" />
+        <label asp-for="Name">Введите Имя автора</label>
+        <input asp-for="Name" type="text" value="@Model.Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+</form>

@@ -134,7 +134,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("\r\n            </dd>\r\n        </dl>\r\n        ");
             EndContext();
             BeginContext(1108, 99, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "280e30ad975742e0bc2094da01165943", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1c3181f902ea40fdbf17eb599000d329", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -206,7 +206,7 @@ AddHtmlAttributeValue("", 1135, Model.Book.ImageType, 1135, 21, false);
             WriteLiteral(")</li>\r\n                ");
             EndContext();
             BeginContext(1512, 149, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "864e9fc6d4c84f80bb1f8345240da065", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "48fe9887e0e043b8b2168ceca28f3be6", async() => {
                 BeginContext(1604, 53, true);
                 WriteLiteral("<div class=\"btn btn-success\">Добавить в корзину</div>");
                 EndContext();
@@ -278,7 +278,7 @@ AddHtmlAttributeValue("", 1135, Model.Book.ImageType, 1135, 21, false);
             WriteLiteral("        ");
             EndContext();
             BeginContext(1853, 126, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e6d54bd783ad470fb54045d1d8d46eed", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8220102ff7a14d1692410ea06f7d77aa", async() => {
                 BeginContext(1934, 41, true);
                 WriteLiteral("<div class=\"btn btn-danger\">Удалить</div>");
                 EndContext();
@@ -315,7 +315,7 @@ AddHtmlAttributeValue("", 1135, Model.Book.ImageType, 1135, 21, false);
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(1989, 126, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7aa05c86843e4d13b12932db988874e6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "03de29a8895d4749b6b1fc2ac9f8a3be", async() => {
                 BeginContext(2068, 43, true);
                 WriteLiteral("<div class=\"btn btn-default\">Изменить</div>");
                 EndContext();
@@ -360,7 +360,7 @@ AddHtmlAttributeValue("", 1135, Model.Book.ImageType, 1135, 21, false);
             WriteLiteral("    ");
             EndContext();
             BeginContext(2132, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0e130317fe244e4d9eb190529a066b79", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "336d1ed95c05410d9b32dba41ca6a5c3", async() => {
                 BeginContext(2154, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
