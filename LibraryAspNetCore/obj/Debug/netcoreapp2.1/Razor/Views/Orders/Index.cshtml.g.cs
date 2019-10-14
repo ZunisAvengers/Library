@@ -68,7 +68,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("    <h2>Ваши заказы</h2>\r\n    ");
             EndContext();
             BeginContext(140, 46, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d066d41fc54c42f8b371de76d19991dc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "431a4af2088f4725b182b8057c7156a5", async() => {
                 BeginContext(162, 20, true);
                 WriteLiteral("История моих заказов");
                 EndContext();
@@ -176,7 +176,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("                </td>\r\n                <td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(1255, 117, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8c222fc40e20472da31121728571c4b1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "92cd8a5cc39e4c3b8654e4bf8c65017a", async() => {
                 BeginContext(1324, 44, true);
                 WriteLiteral("<div class=\"btn btn-default\">Подробнее</div>");
                 EndContext();
@@ -231,7 +231,7 @@ else
             WriteLiteral("    <h2>Сейчас нет действующих заказов</h2>\r\n    <h4>");
             EndContext();
             BeginContext(1529, 41, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a0cf378920b843b8bf08bbc6d07659d3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "312c7bf82ff3473988d4b7fba4e04da9", async() => {
                 BeginContext(1551, 15, true);
                 WriteLiteral("История заказов");
                 EndContext();

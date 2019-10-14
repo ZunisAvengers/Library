@@ -64,12 +64,12 @@
 
     @if (!Model.Order.DeliveredInLibrary)
     {
-        <div class="btn btn-default"><a asp-action="SetBook" asp-controller="Observer" asp-route-id="@Model.Order.Id">Set Book</a></div>
-        <div class="btn btn-default"><a asp-action="Close" asp-controller="Observer" asp-route-id="@Model.Order.Id">Close Order</a></div>
-        <div class="btn btn-default"><a asp-action="Index">Back to List</a></div>
+        <div class="btn btn-default"><a asp-action="SetBook" asp-controller="Observer" asp-route-id="@Model.Order.Id">Выдать книги</a></div>
+        <div class="btn btn-default"><a asp-action="Close" asp-controller="Observer" asp-route-id="@Model.Order.Id">Закрыть заказ</a></div>
+        <div class="btn btn-default"><a asp-action="Index">Назад к списку</a></div>
     }
     else
     {
-        <div class="btn btn-default"><a asp-action="Story">Back to List</a></div>
+        <div class="btn btn-default"><a asp-action="Story">Назад к списку</a></div>
     }
 </div>
