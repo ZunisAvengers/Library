@@ -16,7 +16,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.DateOrder</td>
+                <td>@item.DateOrder.ToString("D")</td>
                 <td>@item.OrderDetailse.Count</td>
                 <td>
                     @if (!item.IsGet)

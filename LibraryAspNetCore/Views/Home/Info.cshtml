@@ -2,30 +2,40 @@
 
 @{
     ViewData["Title"] = "Info";
-    string href = "";
-    if (Model.Book.ImageType == "image/jpg") { href = Model.Book.ImagePath + ".jpg"; }
-    else if (Model.Book.ImageType == "image/png") { href = Model.Book.ImagePath + ".png"; }
+    
 }
 
-<h2>Info</h2>
+<h2>Информация о книге @Model.Book.Name</h2>
 
 <div>
-    <h4>Book</h4>
+
     <hr />
     <div style="display:flex;justify-content:space-between">
 
         <dl class="dl-horizontal" style="">
             <dt>
-                @Html.DisplayNameFor(model => model.Book.Name)
+                Автор:
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Book.Name)
+                @Model.Book.Author.Name
+            </dd>
+            <dt>
+                Жанр:
+            </dt>
+            <dd>
+                @Model.Book.Subject.Name
+            </dd>
+            <dt>
+                Издательство:
+            </dt>
+            <dd>
+                @Model.Book.PublishingHouse.Name
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Book.YearOfPublishing)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Book.YearOfPublishing)
+                @Model.Book.YearOfPublishing.ToString("D")
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Book.ISBN)
@@ -34,7 +44,7 @@
                 @Html.DisplayFor(model => model.Book.ISBN)
             </dd>
         </dl>
-        <img src="~/@href" typeof="@Model.Book.ImageType" class="img-circle img-thumbnail" align="right" />
+        <img src="~/@Model.Book.ImagePath" typeof="@Model.Book.ImageType" width="500" height="500" class="img-circle img-thumbnail" align="right" />
     </div>
     @if (Model.Libraries.Count > 0 && Model.Libraries != null)
     {
@@ -42,7 +52,7 @@
         <ul>
             @foreach (var library in Model.Libraries)
             {
-                <li>@library.Library.Name (Книг в наличии: @library.CurrentQuantity)</li>
+                <li>@library.Library.Name (Книг в наличии: @library.CurrentQuantity из @library.TotalQuantity)</li>
                 <a asp-controller="Cart" asp-action="AddBookInCart" asp-route-id="@library.BookinLibraryId"><div class="btn btn-success">Добавить в корзину</div></a>
             }
         </ul>

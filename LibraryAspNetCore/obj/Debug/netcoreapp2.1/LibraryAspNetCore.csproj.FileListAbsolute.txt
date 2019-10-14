@@ -49,3 +49,6 @@ C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netco
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\Author.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\Subject.cshtml.g.cs
 C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\PublihingHouse.cshtml.g.cs
+C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\EditAuthor.cshtml.g.cs
+C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\EditPublihingHouse.cshtml.g.cs
+C:\Users\ktitov\source\repos\LibraryAspNetCore\LibraryAspNetCore\obj\Debug\netcoreapp2.1\Razor\Views\Create\EditSubject.cshtml.g.cs

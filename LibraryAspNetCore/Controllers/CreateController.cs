@@ -6,6 +6,8 @@ using LibraryAspNetCore.Models;
 using LibraryAspNetCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -39,13 +41,13 @@ namespace LibraryAspNetCore.Controllers
                 Book book = await _context.Books.FirstOrDefaultAsync(b => b.Name == model.Name || b.ISBN == model.ISBN);
                 if (book == null)
                 {
-                    string path = "images/noneBook",
+                    string path = "images/noneBook.jpg",
                         type = "image/jpg";
                     if (model.Image != null)
                     {
-                        path = "images/" + model.Name.Replace(' ', '_');
+                        path = "images/" + model.Image.FileName.Replace(' ', '_');
                         type = model.Image.ContentType;
-                        using (FileStream fs = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                        using (FileStream fs = new FileStream(_appEnvironment.WebRootPath + "/" + path, FileMode.Create))
                             await model.Image.CopyToAsync(fs);
                     }
                     _context.Books.Add(book = new Book

@@ -14,19 +14,19 @@
             Дата заказа
         </dt>
         <dd>
-            @Html.DisplayFor(model => Model.Order.DateOrder.ToString("D"))
+            @Model.Order.DateOrder.ToString("D")
         </dd>
         <dt>
             Дата Выдачи заказа
         </dt>
         <dd>
-            @Html.DisplayFor(model => Model.Order.DateGet.ToString("D"))
+            @Model.Order.DateGet.ToString("D")
         </dd>
         <dt>
             Библиотека:
         </dt>
         <dd>
-            <a asp-action="Indo" asp-controller="Library" asp-route="@Model.Order.Library.Id">@Model.Order.Library.Name</a>
+           <a asp-action="Info" asp-controller="Library" asp-route-id="@Model.Order.Library.Id"><p>@Model.Order.Library.Name</p></a>
         </dd>
         <dt>
             Статус:
@@ -54,9 +54,9 @@
     <ul>
         @foreach(var item in Model.Books)
         {
-            <li>
-                <a asp-action="Info" asp-controller="Home" asp-route="@item.Id">@item.Name (@item.Author.Name)</a>
-            </li>
+        <li>
+           <a asp-action="Info" asp-controller="Home" asp-route-id="@item.Id">@item.Name (@item.Author.Name)</a>
+        </li>
         }
     </ul>
 </div>

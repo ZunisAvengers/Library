@@ -9,14 +9,14 @@
     <table class="table">
         <tr>
             <td>Дата заказа</td>
-            <td>Список книг</td>
+            <td>Колличество книг</td>
             <td>Статус</td>
             <td></td>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.DateOrder</td>
+                <td>@item.DateOrder.ToString("D")</td>
                 <td>@item.OrderDetailse.Count</td>
                 <td>
                     @if (!item.IsGet)

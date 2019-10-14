@@ -1,5 +1,6 @@
 ﻿@model LibraryAspNetCore.ViewModels.AddBookViewModel
-
+@using LibraryAspNetCore.Models
+@using LibraryAspNetCore.ViewModels
 @{
     ViewData["Title"] = "AddBook";
 }
@@ -10,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddBook" id="bookform">
+        <form asp-action="AddBook" id="bookform" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -36,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="YearOfPublishing" class="control-label"></label>
-                <input asp-for="YearOfPublishing" type="datetime-local" class="form-control" />
+                <input asp-for="YearOfPublishing" type="date" class="form-control" />
                 <span asp-validation-for="YearOfPublishing" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input type="file" asp-for="Image"/>
+                <input type="file" name="Image"/>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

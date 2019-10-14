@@ -1,10 +1,10 @@
 ﻿@model LibraryAspNetCore.ViewModels.OrderViewModel
 
 @{
-    ViewData["Title"] = "Info";
+    ViewData["Title"] = "Информация о заказе";
 }
 
-<h2>Info</h2>
+<h2>Информация о заказе</h2>
 
 <div>
     <h4>Order</h4>
@@ -26,7 +26,7 @@
             Библиотека:
         </dt>
         <dd>
-            @Model.Order.Library.Name
+            @Model.Order.Library.Name (Номер телефона @Model.Order.Library.Phone)
         </dd>
         <dt>
             Статус:
@@ -55,7 +55,7 @@
         @foreach (var item in Model.Books)
         {
             <li>
-                <a asp-action="Info" asp-controller="Home" asp-route="@item.Id">@item.Name (@item.Author.Name)</a>
+                <a asp-action="Info" asp-controller="Home" asp-route-id="@item.Id">@item.Name (@item.Author.Name)</a>
             </li>
         }
     </ul>

@@ -78,7 +78,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("</td>\r\n                    <td>");
             EndContext();
             BeginContext(387, 123, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e02ba0ab0acf4108a5dba74c3e2421f0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "70902504826a4a6595b07a705f689255", async() => {
                 BeginContext(463, 43, true);
                 WriteLiteral("<div class=\"btn btn-success\">Изменить</div>");
                 EndContext();
@@ -123,7 +123,7 @@ using LibraryAspNetCore.Models;
             WriteLiteral("        </table>\r\n    </div>\r\n    <br />\r\n    ");
             EndContext();
             BeginContext(601, 301, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a333d7fba2d49658450d10a880f9490", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8c5a4ae886a94feeb41a8b519fe56a83", async() => {
                 BeginContext(665, 230, true);
                 WriteLiteral("\r\n        <label class=\"Name\">Введите название Жанра</label><br />\r\n        <input type=\"text\" class=\"Name\" name=\"Name\" /><br /><br />\r\n        <input type=\"submit\" value=\"Добваить категорию\" class=\"btn btn-default\" /><br />\r\n    ");
                 EndContext();

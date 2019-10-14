@@ -33,7 +33,7 @@ namespace LibraryAspNetCore
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=LibraryAspNetCoreDb;Trusted_Connection=True;"));//
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -51,7 +51,7 @@ namespace LibraryAspNetCore
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddMemoryCache();
-            services.AddSession();
+            //services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,13 +72,13 @@ namespace LibraryAspNetCore
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseDeveloperExceptionPage();
-            app.UseSession();
+            //app.UseSession();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}", new { controller = "Create", action = "Index" //, id = "aaa67fcf-15f6-48c1-9f14-f4382fc61810"
+                    template: "{controller}/{action}/{id?}", new { controller = "Home", action = "Index" //, id = "aaa67fcf-15f6-48c1-9f14-f4382fc61810"
                     });
             });
 
